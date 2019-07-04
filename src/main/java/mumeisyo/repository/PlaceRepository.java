@@ -14,7 +14,7 @@ import mumeisyo.model.Place;
 @Repository
 public interface PlaceRepository extends JpaRepository<Place, Long> {
 	//最新の投稿3件を取得
-	@Query(value = "SELECT * FROM place ORDER BY post_date DESC LIMIT 4", nativeQuery = true)
+	@Query(value = "SELECT * FROM place ORDER BY post_date DESC LIMIT 3", nativeQuery = true)
 	public List<Place> newPlace();
 	
 	//投稿内容を全て取得
