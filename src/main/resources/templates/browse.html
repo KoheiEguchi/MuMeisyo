@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout::head('投稿一覧')"></head>
+<body>
+	<div th:replace="layout::header"></div>
+	<div class="container">
+		<div class="h1 mt-4">投稿一覧</div>
+		<div class="alert alert-danger w-100" th:if="${msg}" th:text="${msg}"></div>
+		<div class="row">
+			<div th:each="place: ${placeList}" th:object="${place}">
+				<div class="px-5">
+					<form th:action="@{/otherUserDetail}" method="post">
+						<p>
+							投稿者：<span th:text="*{name}">様</span>
+							<button class="btn btn-info shadow" type="submit" name="name" th:value="*{name}">投稿履歴を見る</button>
+						</p>
+					</form>
+					<div th:replace="layout::picTextDate"></div>
+					<form th:action="@{/browse}" method="post">
+						<p>
+							高評価数：<span th:text="*{good}"></span>
+							<button class="btn btn-warning shadow" type="submit" name="id" th:value="*{id}">高評価する</button>
+						</p>
+					</form>
+				</div>
+			</div>
+		</div>
+		<a th:href="@{/top}"><input class="btn btn-success shadow my-4" type="button" value="戻る"></a>
+	</div>
+	<div th:replace="layout::footer"></div>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout::head('投稿')"></head>
+<body>
+	<div th:replace="layout::header"></div>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-4 col-xs-1"></div>
+			<div class="col-md-4 col-xs-10">
+				<div class="h1 mt-4">投稿</div>
+				<div class="alert alert-danger w-100" th:if="${msg}" th:text="${msg}"></div>
+				<form th:action="@{/post}" method="post" enctype="multipart/form-data">
+					<div class="border">
+						<p>写真(任意)</p>
+						<input type="file" name="pic">
+					</div>
+					<div class=border>
+						<p>説明</p>
+						<textarea name="text" rows="5" cols="40" placeholder="投稿する場所の説明や気に入ったところをお書きください。"></textarea>
+					</div>
+					<br>
+					<input class="btn btn-primary shadow my-4" type="submit" value="投稿">
+				</form>
+				<a th:href="@{/top}"><input class="btn btn-success shadow" type="button" value="戻る"></a>
+			</div>
+			<div class="col-md-4 col-xs-1"></div>
+		</div>
+	</div>
+	<div th:replace="layout::footer"></div>
+</body>
+</html>

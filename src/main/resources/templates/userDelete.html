@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout::head('退会')"></head>
+<body>
+	<div th:replace="layout::header"></div>
+	<div class="container">
+		<div class="h1 mt-5">本当に<span class="text-danger">退会</span>しますか？</div>
+		<div class="mt-5">
+			<a th:href="@{/deleteAction}"><input class="btn btn-danger shadow" type="button" value="退会する(戻せません！)"></a>
+		</div>
+		<div class="my-4">
+			<a th:href="@{/userDetail}"><input class="btn btn-success shadow" type="button" value="戻る"></a>
+		</div>
+	</div>
+	<div th:replace="layout::footer"></div>
+</body>
+</html>

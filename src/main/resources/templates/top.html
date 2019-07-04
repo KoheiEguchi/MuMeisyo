@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout::head('トップ')"></head>
+<body>
+	<div th:replace="layout::header"></div>
+	<div class="container">
+		<div class="jumbotron">
+			<div class="display-4">無名所</div>
+		</div>
+		<div class="h1 mt-4" th:inline="text">ようこそ<span th:text="${name}"></span>様</div>
+		<div class="alert alert-danger w-100" th:if="${msg}" th:text="${msg}"></div>
+		<div class="h2 mt-3">最新の投稿</div>
+		<div th:each="place: ${newPlaceList}" th:object="${place}">
+			<div th:replace="layout::picTextDate"></div>
+			<p>高評価数：<span th:text="*{good}"></span></p>a
+		</div>
+		<div class="mt-4 row">
+			<div class="col-md-4 col-xs-1"></div>
+			<div class="col-md-4 col-xs-10">
+				<div class="row">
+					<div class="col-md-4 col-xs-12">
+						<a th:href="@{/browse}"><input class="btn btn-info shadow my-2" type="button" value="投稿を見る"></a>
+					</div>
+					<div class="col-md-4 col-xs-12">
+						<a th:href="@{/post}"><input class="btn btn-success shadow my-2" type="button" value="投稿する"></a>
+					</div>
+					<div class="col-md-4 col-xs-12">
+						<a th:href="@{/userDetail}"><input class="btn btn-warning shadow my-2" type="button" value="ユーザー情報"></a>
+					</div>
+				</div>
+			    <a th:href="@{/logout}"><input class="btn btn-secondary shadow mt-4" type="button" value="ログアウト"></a>
+			</div>
+			<div class="col-md-4 col-xs-1"></div>
+		</div>
+	</div>
+	<div th:replace="layout::footer"></div>
+</body>
+</html>

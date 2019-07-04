@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<!--/* head */-->
+	<head th:fragment="head(title)">
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		
+		<link rel="stylesheet" th:href="@{webjars/bootstrap/4.2.1/css/bootstrap.min.css}">
+		<link rel="stylesheet" type="text/css" th:href="@{css/original/common.css}">
+		<script type="text/javascript" th:src="@{webjars/jquery/1.12.4/jquery.min.js}"></script>
+		<script type="text/javascript" th:src="@{webjars/bootstrap/4.2.1/js/bootstrap.min.js}"></script>
+		
+		<title th:text="${title} + ' | 無名所'"></title>
+	</head>
+	<!--/* ヘッダー */-->
+	<header th:fragment="header">
+		<nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-info">
+			<a class="navbar-brand text-light" th:href="@{/top}">無名所</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarList">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarList">
+				<ul class="navbar-nav">
+					<li class="nav-item px-3"><a class="nav-link text-light" th:href="@{/browse}">投稿を見る</a></li>
+					<li class="nav-item px-3"><a class="nav-link text-light" th:href="@{/post}">投稿する</a></li>
+					<li class="nav-item px-3"><a class="nav-link text-light" th:href="@{/userDetail}">ユーザー情報</a></li>
+					<li class="nav-item px-3"><a class="nav-link text-light" th:href="@{/logout}">ログアウト</a></li>
+				</ul>
+			</div>
+		</nav>
+	</header>
+	<!--/* 新規登録、変更 */-->
+	<div th:fragment="createOrUpdate">
+		<div class="row">
+			<div class="col-md-6 col-xs-12 text-left">ユーザー名</div>
+			<div class="col-md-6 col-xs-12 text-right"><input type="text" name="name" placeholder="ユーザー名" autofocus></div>
+			<div class="col-md-6 col-xs-12 text-left">パスワード</div>
+			<div class="col-md-6 col-xs-12 text-right"><input type="password" name="pass1" placeholder="パスワード"></div>
+			<div class="col-md-6 col-xs-12 text-left">パスワード(確認)</div>
+			<div class="col-md-6 col-xs-12 text-right"><input type="password" name="pass2" placeholder="パスワード(確認)"></div>
+		</div>
+	</div>
+	<!--/* 投稿された写真、説明、日時 */-->
+	<div th:fragment="picTextDate">
+		<p>写真：
+			<span th:if="*{pic != null}"><img th:src="@{../../../__*{pic}__}" th:alt="投稿された画像"></span>
+			<span th:if="*{pic == null}">なし</span>
+		</p>
+		<p>説明：<span th:text="*{text}"></span></p>
+		<p>投稿日時：<span th:text="*{#calendars.format(postDate, 'yyyy年M月d日 h時m分s秒')}"></span></p>
+	</div>
+	<!--/* フッター */-->
+	<footer th:fragment="footer">
+		<div class="container-fluid">
+			<div class="fixed-bottom bg-success">
+				<div class="text-right">フッター</div>
+			</div>
+		</div>
+	</footer>
+</html>
