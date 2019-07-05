@@ -43,7 +43,7 @@ public class UserDetail {
 	}
 	
 	//他ユーザーの情報ページを表示
-	@RequestMapping(value = "/otherUserDetail", method = RequestMethod.POST)
+	@RequestMapping(value = "/otherUserDetail", method = RequestMethod.GET)
 	public String otherUserDetail(@RequestParam("name")String name, Model model) {
 		String sessionName = (String)session.getAttribute("name");
 		//自分の情報ページへ行く場合

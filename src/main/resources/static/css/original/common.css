@@ -38,3 +38,54 @@ div, p {
 	display: flex;
 	flex-wrap: wrap;
 }
+/* トップ画面での画像の大きさ設定 */
+.topPic {
+	width: 300px;
+	height: 450px;
+}
+
+/* 一行で説明を省略する */
+.textShort {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+/* 一覧画面の表示を整える */
+.placesPadding {
+	padding: 0;
+}
+/* 一覧画面での画像の大きさ設定 */
+.thumbnail {
+	width: 100px;
+	height: 150px;
+}
+
+/* ユーザー情報ページへのリンクの表示を整える */
+.userLink {
+	color: indigo;
+}
+.userLink:hover {
+	color: indigo;
+}
+
+/* 詳細ページへのリンクの表示を整える */
+.detailLink {
+	color: black;
+}
+.detailLink:hover {
+	color: black;
+	text-decoration: none;
+}
+.detailLinkArea {
+	transition: 0.3s;
+}
+.detailLinkArea:hover {
+	background-color: #32cd32;
+}
+
+/* 詳細画面での画像の大きさ設定 */
+.detailPic {
+	width: 500px;
+	height: 750px;
+}

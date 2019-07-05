@@ -11,9 +11,20 @@
 		<div class="alert alert-danger w-100" th:if="${msg}" th:text="${msg}"></div>
 		<div class="h2 my-4">最新の投稿</div>
 		<div class="row row-eq-height">
-			<div class="col-md-4 col-xs-12" th:each="place: ${newPlaceList}" th:object="${place}">
-				<div th:replace="layout::picTextDate"></div>
-				<p>高評価数：<span th:text="*{good}"></span></p>
+			<div class="col-md-4 col-xs-12 placesPadding" th:inline="text" th:each="place: ${newPlaceList}" th:object="${place}">
+				<a class="detailLink" th:href="@{/placeDetail(id=*{id})}">
+					<div class="detailLinkArea">
+						<a class="userLink" th:href="@{/otherUserDetail(name=*{name})}">投稿者：[[*{name}]]様</a>
+						<p>投稿日時</p>
+						<p>[[*{#calendars.format(postDate, 'yyyy年M月d日 k時m分s秒')}]]</p>
+						<p>写真<span th:if="*{pic == null}">なし</span></p>
+						<p th:if="*{pic != null}"><img class="topPic" th:src="@{/__*{pic}__}" th:alt="投稿された画像"></p>
+						<p th:if="*{pic == null}"><img class="topPic" th:src="@{/pic/noImg.jpg}" th:alt="画像なし"></p>
+						<p>説明</p>
+						<p class="textShort">[[*{text}]]</p>
+						<p>高評価数：[[*{good}]]</p>
+					</div>
+				</a>
 			</div>
 		</div>
 		<div class="mt-4 row">
@@ -30,7 +41,7 @@
 						<a th:href="@{/userDetail}"><input class="btn btn-warning shadow my-2" type="button" value="ユーザー情報"></a>
 					</div>
 				</div>
-			    <a th:href="@{/logout}"><input class="btn btn-secondary shadow mt-4" type="button" value="ログアウト"></a>
+			    <a th:href="@{/logout}"><input class="btn btn-secondary shadow mt-5" type="button" value="ログアウト"></a>
 			</div>
 			<div class="col-md-4 col-xs-1"></div>
 		</div>

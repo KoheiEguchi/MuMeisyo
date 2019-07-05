@@ -4,25 +4,27 @@
 <body>
 	<div th:replace="layout::header"></div>
 	<div class="container">
-		<div class="h1 mt-4">投稿一覧</div>
+		<div class="h1 my-4">投稿一覧</div>
 		<div class="alert alert-danger w-100" th:if="${msg}" th:text="${msg}"></div>
-		<div class="row">
-			<div th:each="place: ${placeList}" th:object="${place}">
-				<div class="px-5">
-					<form th:action="@{/otherUserDetail}" method="post">
-						<p>
-							投稿者：<span th:text="*{name}">様</span>
-							<button class="btn btn-info shadow" type="submit" name="name" th:value="*{name}">投稿履歴を見る</button>
-						</p>
-					</form>
-					<div th:replace="layout::picTextDate"></div>
-					<form th:action="@{/browse}" method="post">
-						<p>
-							高評価数：<span th:text="*{good}"></span>
-							<button class="btn btn-warning shadow" type="submit" name="id" th:value="*{id}">高評価する</button>
-						</p>
-					</form>
-				</div>
+		<div class="row row-eq-height">
+			<div class="col-md-3 col-xs-6 placesPadding" th:inline="text" th:each="place: ${placeList}" th:object="${place}">
+				<a class="detailLink" th:href="@{/placeDetail(id=*{id})}">
+					<div class="detailLinkArea">
+						<a class="userLink" th:href="@{/otherUserDetail(name=*{name})}">投稿者：[[*{name}]]様</a>
+						<p>投稿日時</p>
+						<p>[[*{#calendars.format(postDate, 'yyyy年M月d日 k時m分s秒')}]]</p>
+						<p>写真<span th:if="*{pic == null}">なし</span></p>
+						<p th:if="*{pic != null}"><img class="thumbnail" th:src="@{/__*{pic}__}" th:alt="投稿された画像"></p>
+						<p th:if="*{pic == null}"><img class="thumbnail" th:src="@{/pic/noImg.jpg}" th:alt="画像なし"></p>
+						<p>説明</p>
+						<p class="textShort">[[*{text}]]</p>
+						<form th:action="@{/browse}" method="post">
+							<p>高評価数：[[*{good}]]</p>
+							<p><button class="btn btn-warning shadow" type="submit" name="id" th:value="*{id}">高評価する</button></p>
+						</form>
+					</div>
+				</a>
+				<br>
 			</div>
 		</div>
 		<a th:href="@{/top}"><input class="btn btn-success shadow my-4" type="button" value="戻る"></a>

@@ -45,10 +45,14 @@ public class Post {
 		}else {
 			//画像を保存する
 			String picName = common.picSave(pic);
+			//改行を反映
+			//String text = textBefore.replace("\r\n", "<br/>");
 			
 			String name = (String)session.getAttribute("name");
 			placeRep.newPost(name, picName, text);
 			model.addAttribute("msg", "投稿を受けつけました。");
+			//最新の投稿3件を取得
+			common.getNewPlaceList(model);
 			return "top";
 		}
 	}

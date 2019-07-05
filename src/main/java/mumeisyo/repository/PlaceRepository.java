@@ -21,6 +21,10 @@ public interface PlaceRepository extends JpaRepository<Place, Long> {
 	@Query(value = "SELECT * FROM place", nativeQuery = true)
 	public List<Place> getPlace();
 	
+	//指定された投稿の詳細を取得
+	@Query(value = "SELECT * FROM place WHERE id = :id", nativeQuery = true)
+	public List<Place> getPlaceDetail(long id);
+	
 	//ユーザーの投稿履歴取得
 	@Query(value = "SELECT * FROM place WHERE name = :name", nativeQuery = true)
 	public List<Place> userPlace(String name);

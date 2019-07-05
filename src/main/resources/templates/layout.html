@@ -39,15 +39,6 @@
 			<div class="col-md-6 col-xs-12 text-right"><input type="password" name="pass2" placeholder="パスワード(確認)"></div>
 		</div>
 	</div>
-	<!--/* 投稿された日時、写真、説明 */-->
-	<div th:fragment="picTextDate">
-		<p>投稿日時：<span th:text="*{#calendars.format(postDate, 'yyyy年M月d日 h時m分s秒')}"></span></p>
-		<p>写真：
-			<span th:if="*{pic != null}"><img th:src="@{/__*{pic}__}" th:alt="投稿された画像" width="300" height="450"></span>
-			<span th:if="*{pic == null}">なし</span>
-		</p>
-		<p>説明：<span th:text="*{text}"></span></p>
-	</div>
 	<!--/* フッター */-->
 	<footer th:fragment="footer">
 		<div class="container-fluid">
