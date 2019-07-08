@@ -8,7 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import mumeisyo.model.Place;
 import mumeisyo.repository.PlaceRepository;
@@ -33,14 +32,5 @@ public class Browse {
 			model.addAttribute("placeList", placeList);
 			return "browse";
 		}
-	}
-	
-	//高評価を追加する
-	@RequestMapping(value = "/browse", method = RequestMethod.POST)
-	public String goodPlus(@RequestParam("id")long id, Model model) throws SQLException {
-		placeRep.goodPlus(id);
-		model.addAttribute("msg", "高評価しました。");
-		browseOpen(model);
-		return "browse";
 	}
 }

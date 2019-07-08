@@ -4,23 +4,28 @@
 <body>
 	<div th:replace="layout::header"></div>
 	<div class="container">
-		<div class="jumbotron">
-			<div class="display-4">無名所</div>
-		</div>
+		<a class="detailLink" th:href="@{/top}">
+			<div class="jumbotron">
+				<div class="display-4">無名所</div>
+			</div>
+		</a>
 		<div class="h1 mt-4" th:inline="text">ようこそ<span th:text="${name}"></span>様</div>
 		<div class="alert alert-danger w-100" th:if="${msg}" th:text="${msg}"></div>
 		<div class="h2 my-4">最新の投稿</div>
 		<div class="row row-eq-height">
 			<div class="col-md-4 col-xs-12 placesPadding" th:inline="text" th:each="place: ${newPlaceList}" th:object="${place}">
-				<a class="detailLink" th:href="@{/placeDetail(id=*{id})}">
+				<a class="detailLink" th:href="@{/placeDetail(id=*{id},name=${name})}">
 					<div class="detailLinkArea">
-						<a class="userLink" th:href="@{/otherUserDetail(name=*{name})}">投稿者：[[*{name}]]様</a>
-						<p>投稿日時</p>
+						<object><a class="userLink" th:href="@{/otherUserDetail(name=*{name})}">投稿者：[[*{name}]]様</a></object>
 						<p>[[*{#calendars.format(postDate, 'yyyy年M月d日 k時m分s秒')}]]</p>
-						<p>写真<span th:if="*{pic == null}">なし</span></p>
-						<p th:if="*{pic != null}"><img class="topPic" th:src="@{/__*{pic}__}" th:alt="投稿された画像"></p>
-						<p th:if="*{pic == null}"><img class="topPic" th:src="@{/pic/noImg.jpg}" th:alt="画像なし"></p>
-						<p>説明</p>
+						<div th:if="*{pic == null}">
+							<p>写真なし</p>
+							<img class="topPic" th:src="@{/pic/noImg.jpg}" th:alt="画像なし">
+						</div>
+						<div th:if="*{pic != null}">
+							<p><br></p>
+							<img class="topPic" th:src="@{/__*{pic}__}" th:alt="投稿された画像">
+						</div>
 						<p class="textShort">[[*{text}]]</p>
 						<p>高評価数：[[*{good}]]</p>
 					</div>

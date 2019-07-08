@@ -21,12 +21,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 
 @Table(name="mumeisyo")
-public class Place {
-	//自分の投稿かの確認用
-	public Place(String name) {
-		this.name = name;
-	}
-	
+public class Good {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id")
@@ -36,16 +31,11 @@ public class Place {
 	@Column(name="name")
 	private String name;
 	
-	@Column(name="pic")
-	private String pic;
-	
 	@NotNull
-	@Column(name="text")
-	private String text;
+	@Column(name="place_id")
+	private long placeId;
 	
-	@Column(name="post_date")
-	private Timestamp postDate;
+	@Column(name="good_date")
+	private Timestamp goodDate;
 	
-	@Column(name="good")
-	private int good;
 }
