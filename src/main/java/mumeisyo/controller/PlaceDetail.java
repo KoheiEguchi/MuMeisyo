@@ -26,7 +26,7 @@ public class PlaceDetail {
 	
 	//指定された投稿の詳細を表示
 	@RequestMapping(value = "/placeDetail", method = RequestMethod.GET)
-	public String placeDetailOpen(@RequestParam("id")long id, @RequestParam("name")String name, Model model) {
+	public String placeDetailOpen(@RequestParam("id")long id, @RequestParam("userId")long userId, Model model) {
 		//投稿内容
 		List<Place> placeDetail = placeRep.getPlaceDetail(id);
 		model.addAttribute("placeDetail", placeDetail);
@@ -34,16 +34,17 @@ public class PlaceDetail {
 		List<Good> goodUsers = goodRep.getGoodUsers(id);
 		model.addAttribute("goodUsers", goodUsers);
 		//自分の投稿か確認
-		String myPostCheck = placeRep.myPostCheck(id);
+		long myPostCheck = placeRep.myPostCheck(id);
 		//自分の投稿だった場合
-		if(myPostCheck.equals(name)) {
+		if(myPostCheck == userId) {
 			model.addAttribute("myPost", "myPost");
 		//他人の投稿だった場合
 		}else {
 			//すでに高評価しているか確認
-			List<Good> didGoodCheck = goodRep.didGoodCheck(name, id);
+			List<Good> didGoodCheck = goodRep.didGoodCheck(userId, id);
 			if(didGoodCheck.isEmpty()) {
 				model.addAttribute("noGood", "noGood");
+				common.sessionSet(model);
 			}
 		}
 		return "placeDetail";

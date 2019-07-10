@@ -39,9 +39,21 @@ public class Common {
 			model.addAttribute("msg", "ログインしていません。");
 			check = false;
 		}else {
+			//セッション読み込み
+			sessionSet(model);
 			check = true;
 		}
 		return check;
+	}
+	
+	//セッション読み込み
+	public void sessionSet(Model model) {
+		//セッションのID読み込み
+		long userId = (long)session.getAttribute("userId");
+		model.addAttribute("userId", userId);
+		//セッションの名前読み込み
+		String name = (String)session.getAttribute("name");
+		model.addAttribute("name", name);
 	}
 	
 	//最新の投稿3件を取得
@@ -94,12 +106,12 @@ public class Common {
 	}
 	
 	//ユーザー情報と投稿履歴を取得する
-	public void getUserDetail(String name, Model model) {
+	public void getUserDetail(long userId, Model model) {
 		//ユーザー情報を取得する
-		List<User> userData = userRep.userCheck(name);
+		List<User> userData = userRep.getUserData(userId);
 		model.addAttribute("userData", userData);
 		//ユーザーの投稿履歴を取得する
-		List<Place> placeList = placeRep.userPlace(name);
+		List<Place> placeList = placeRep.userPlace(userId);
 		model.addAttribute("placeList", placeList);
 	}
 	

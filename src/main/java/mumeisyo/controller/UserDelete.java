@@ -35,8 +35,9 @@ public class UserDelete {
 	//退会
 	@RequestMapping(value = "/deleteAction", method = RequestMethod.GET)
 	public String userDelete(Model model) {
+		long userId = (long)session.getAttribute("userId");
 		String name = (String)session.getAttribute("name");
-		userRep.userDelete(name);
+		userRep.userDelete(userId, name);
 		session.invalidate();
 		model.addAttribute("msg", "退会しました。");
 		return "login";

@@ -17,7 +17,11 @@ public interface UserRepository extends JpaRepository<User, Long> {
 	@Query(value = "SELECT * FROM user WHERE name = :name AND password = :password", nativeQuery = true)
 	public List<User> login(String name, String password);
 	
-	//ユーザー名被り確認、ユーザー情報取得
+	//IDをセッション登録用に取得
+	@Query(value = "SELECT id FROM user WHERE name = :name AND password = :password", nativeQuery = true)
+	public long getId(String name, String password);
+	
+	//ユーザー名被り確認
 	@Query(value = "SELECT * FROM user WHERE name = :name", nativeQuery = true)
 	public List<User> userCheck(String name);
 	
@@ -26,6 +30,10 @@ public interface UserRepository extends JpaRepository<User, Long> {
 	@Query(value = "INSERT INTO user (name, password) VALUES (:name, :password)", nativeQuery = true)
 	public void userCreate(String name, String password);
 	
+	//ユーザー情報取得
+	@Query(value = "SELECT * FROM user WHERE id = :id", nativeQuery = true)
+	public List<User> getUserData(long id);
+	
 	//ユーザー情報変更
 	@Modifying
 	@Query(value = "UPDATE user SET name = :name, password = :password, update_date = now() WHERE name = :session_name", nativeQuery = true)
@@ -33,6 +41,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
 	
 	//退会
 	@Modifying
-	@Query(value = "DELETE FROM user WHERE name = :name", nativeQuery = true)
-	public void userDelete(String name);
+	@Query(value = "DELETE FROM user WHERE user_id = :user_id AND name = :name", nativeQuery = true)
+	public void userDelete(long user_id, String name);
 }

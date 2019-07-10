@@ -24,6 +24,11 @@ import lombok.NoArgsConstructor;
 
 @Table(name="mumeisyo")
 public class User {	
+	//セッション取得用
+	public User(long id) {
+		this.id = id;
+	}
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id")

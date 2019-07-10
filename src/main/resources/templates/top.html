@@ -4,19 +4,15 @@
 <body>
 	<div th:replace="layout::header"></div>
 	<div class="container">
-		<a class="detailLink" th:href="@{/top}">
-			<div class="jumbotron">
-				<div class="display-4">無名所</div>
-			</div>
-		</a>
+		<div th:replace="layout::jumbotron"></div>
 		<div class="h1 mt-4" th:inline="text">ようこそ<span th:text="${name}"></span>様</div>
 		<div class="alert alert-danger w-100" th:if="${msg}" th:text="${msg}"></div>
 		<div class="h2 my-4">最新の投稿</div>
 		<div class="row row-eq-height">
 			<div class="col-md-4 col-xs-12 placesPadding" th:inline="text" th:each="place: ${newPlaceList}" th:object="${place}">
-				<a class="detailLink" th:href="@{/placeDetail(id=*{id},name=${name})}">
+				<a class="detailLink" th:href="@{/placeDetail(id=*{id},userId=${userId})}">
 					<div class="detailLinkArea">
-						<object><a class="userLink" th:href="@{/otherUserDetail(name=*{name})}">投稿者：[[*{name}]]様</a></object>
+						<object><a class="userLink" th:href="@{/otherUserDetail(userId=*{userId})}">投稿者：[[*{name}]]様</a></object>
 						<p>[[*{#calendars.format(postDate, 'yyyy年M月d日 k時m分s秒')}]]</p>
 						<div th:if="*{pic == null}">
 							<p>写真なし</p>

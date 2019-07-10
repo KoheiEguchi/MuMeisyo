@@ -45,6 +45,10 @@ public class Login {
 			if(!(CollectionUtils.isEmpty(userList))) {
 				model.addAttribute("userList", userList);
 				
+				//セッションにIDを保存
+				long userId = userRep.getId(name, password);
+				session.setAttribute("userId", userId);
+				model.addAttribute("userId", userId);
 				//セッションに名前を保存
 				session.setAttribute("name", name);
 				model.addAttribute("name", name);

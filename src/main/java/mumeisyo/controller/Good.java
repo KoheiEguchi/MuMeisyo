@@ -24,9 +24,10 @@ public class Good {
 	
 	//高評価を追加する
 	@RequestMapping(value = "/good", method = RequestMethod.GET)
-	public String goodPlus(@RequestParam("id")long placeId, @RequestParam("name")String name, Model model) throws SQLException {
+	public String goodPlus(@RequestParam("id")long placeId, @RequestParam("name")String name, @RequestParam("userId")long userId, Model model) 
+			throws SQLException {
 		//高評価詳細追加
-		goodRep.goodPlus(name, placeId);
+		goodRep.goodPlus(userId, name, placeId);
 		//高評価数追加
 		placeRep.goodNumPlus(placeId);
 		model.addAttribute("msg", "高評価しました。");

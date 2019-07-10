@@ -49,7 +49,8 @@ public class Post {
 			//String text = textBefore.replace("\r\n", "<br/>");
 			
 			String name = (String)session.getAttribute("name");
-			placeRep.newPost(name, picName, text);
+			long userId = (long)session.getAttribute("userId");
+			placeRep.newPost(name, userId, picName, text);
 			model.addAttribute("msg", "投稿を受けつけました。");
 			//最新の投稿3件を取得
 			common.getNewPlaceList(model);

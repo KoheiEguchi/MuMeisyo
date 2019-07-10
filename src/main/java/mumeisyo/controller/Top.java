@@ -29,9 +29,8 @@ public class Top {
 		if(check == false) {
 			return "login";
 		}else {
-			//セッションの名前読み込み
-			String name = (String)session.getAttribute("name");
-			model.addAttribute("name", name);
+			//セッション読み込み
+			common.sessionSet(model);
 			//最新の投稿3件を取得
 			common.getNewPlaceList(model);
 			return "top";

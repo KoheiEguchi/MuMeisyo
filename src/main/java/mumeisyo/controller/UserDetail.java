@@ -33,26 +33,32 @@ public class UserDetail {
 		if(check == false) {
 			return "login";
 		}else {
-			String name = (String)session.getAttribute("name");
+			long userId = (long)session.getAttribute("userId");
 			//ユーザー情報と投稿履歴を取得する
-			common.getUserDetail(name, model);
+			common.getUserDetail(userId, model);
 			//情報変更欄表示用
 			model.addAttribute("myData", "myData");
+			
+			//セッション読み込み
+			common.sessionSet(model);
 			return "userDetail";
 		}
 	}
 	
 	//他ユーザーの情報ページを表示
 	@RequestMapping(value = "/otherUserDetail", method = RequestMethod.GET)
-	public String otherUserDetail(@RequestParam("name")String name, Model model) {
-		String sessionName = (String)session.getAttribute("name");
+	public String otherUserDetail(@RequestParam("userId")long userId, Model model) {
+		long sessionUserId = (long)session.getAttribute("userId");
 		//自分の情報ページへ行く場合
-		if(name.equals(sessionName)) {
+		if(userId == sessionUserId) {
 			userDetailOpen(model);
 		//他ユーザーの場合
 		}else {
 			//ユーザー情報と投稿履歴を取得する
-			common.getUserDetail(name, model);
+			common.getUserDetail(userId, model);
+			
+			//セッション読み込み
+			common.sessionSet(model);
 		}
 		return "userDetail";
 	}

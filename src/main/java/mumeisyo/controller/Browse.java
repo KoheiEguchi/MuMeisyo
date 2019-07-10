@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import mumeisyo.model.Place;
 import mumeisyo.repository.PlaceRepository;
@@ -30,7 +31,35 @@ public class Browse {
 		}else {
 			List<Place> placeList = placeRep.getPlace();
 			model.addAttribute("placeList", placeList);
+			
+			//セッション読み込み
+			common.sessionSet(model);
 			return "browse";
 		}
+	}
+	
+	//投稿を並べ替え
+	@RequestMapping(value = "/browseSort", method = RequestMethod.POST)
+	public String browseSort(@RequestParam("sort")String sort, Model model) throws SQLException {
+		List<Place> placeList = null;
+		switch(sort) {
+		case "old":
+			placeList = placeRep.getPlaceOld();
+			break;
+		case "new":
+			placeList = placeRep.getPlaceNew();
+			break;
+		case "good":
+			placeList = placeRep.getPlaceGood();
+			break;
+		case "bad":
+			placeList = placeRep.getPlaceBad();
+			break;
+		}
+		model.addAttribute("placeList", placeList);
+		
+		//セッション読み込み
+		common.sessionSet(model);
+		return "browse";
 	}
 }

@@ -32,6 +32,10 @@ public class Good {
 	private String name;
 	
 	@NotNull
+	@Column(name="user_id")
+	private long userId;
+	
+	@NotNull
 	@Column(name="place_id")
 	private long placeId;
 	

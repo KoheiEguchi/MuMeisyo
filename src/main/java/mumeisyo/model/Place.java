@@ -36,6 +36,10 @@ public class Place {
 	@Column(name="name")
 	private String name;
 	
+	@NotNull
+	@Column(name="user_id")
+	private long userId;
+	
 	@Column(name="pic")
 	private String pic;
 	
