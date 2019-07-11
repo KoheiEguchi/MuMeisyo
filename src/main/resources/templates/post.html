@@ -6,25 +6,27 @@
 	<div class="container">
 		<div th:replace="layout::jumbotron"></div>
 		<div class="row">
-			<div class="col-md-4 col-xs-1"></div>
-			<div class="col-md-4 col-xs-10">
+			<div class="col-md-2 col-xs-1"></div>
+			<div class="col-md-8 col-xs-10">
 				<div class="h1 mt-4">投稿</div>
 				<div class="alert alert-danger w-100" th:if="${msg}" th:text="${msg}"></div>
 				<form th:action="@{/post}" method="post" enctype="multipart/form-data">
-					<div class="border">
-						<p>写真(任意)</p>
-						<input type="file" name="pic">
+					<p>写真(任意)</p>
+					<label class="btn btn-warning shadow my-2 postPicBtn">画像ファイルを選択してください
+						<input id="file" type="file" name="pic" accept="image/*" onChange="$('#fileName').val($(this).prop('files')[0].name)">
+						<input type="text" id="fileUpload" value="ファイル選択" onClick="$('#file').click();">
+					</label>
+					<div>
+						<input type="text" id="fileName" value="" size="35" readonly onClick="$('#file').click();">
 					</div>
-					<div class=border>
-						<p>説明</p>
-						<textarea name="text" rows="5" cols="40" placeholder="投稿する場所の説明や気に入ったところをお書きください。"></textarea>
-					</div>
+					<p>説明</p>
+					<textarea class="postDesc" name="text" placeholder="投稿する場所の説明や気に入ったところをお書きください。"></textarea>
 					<br>
 					<input class="btn btn-primary shadow my-4" type="submit" value="投稿">
 				</form>
 				<a th:href="@{/top}"><input class="btn btn-success shadow" type="button" value="戻る"></a>
 			</div>
-			<div class="col-md-4 col-xs-1"></div>
+			<div class="col-md-2 col-xs-1"></div>
 		</div>
 	</div>
 	<div th:replace="layout::footer"></div>

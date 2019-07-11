@@ -89,3 +89,19 @@ div, p {
 	width: 500px;
 	height: 750px;
 }
+@media screen and (max-width: 500px) {
+	.detailPic {
+		width: 100%;
+		height: 150%;
+	}
+}
+
+.postPicBtn > input {
+	display: none;
+}
+
+/* 投稿画面での説明欄の大きさ設定 */
+.postDesc {
+	width: 100%;
+	height: 250px;
+}
