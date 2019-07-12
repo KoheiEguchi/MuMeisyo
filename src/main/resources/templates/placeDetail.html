@@ -7,7 +7,7 @@
 	<div class="container">
 		<div th:replace="layout::jumbotron"></div>
 		<div class="h1 mt-4">投稿の詳細</div>
-		<div class="alert alert-danger w-100" th:if="${msg}" th:text="${msg}"></div>
+		<div th:replace="layout::msg"></div>
 		<div th:inline="text" th:each="place: ${placeDetail}" th:object="${place}">
 			<a class="userLink" th:href="@{/otherUserDetail(userId=*{userId})}">投稿者：[[*{name}]]様</a>
 			<p>[[*{#calendars.format(postDate, 'yyyy年M月d日 k時m分s秒')}]]</p>

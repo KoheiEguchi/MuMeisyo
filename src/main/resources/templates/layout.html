@@ -37,6 +37,15 @@
 			</div>
 		</a>
 	</div>
+	<!--/* メッセージ */-->
+	<div th:fragment="msg">
+		<div th:if="${msg}">
+			<div class="alert alert-danger alert-dismissible w-100 text-center rounded-0 fade show">
+				<div th:text="${msg}"></div>
+				<button type="button" class="close" data-dismiss="alert">&times;</button>
+			</div>
+		</div>
+	</div>
 	<!--/* 新規登録、変更 */-->
 	<div th:fragment="createOrUpdate">
 		<div class="row">

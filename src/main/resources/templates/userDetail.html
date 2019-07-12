@@ -7,7 +7,7 @@
 		<div th:replace="layout::jumbotron"></div>
 		<div th:inline="text" th:each="user: ${userData}" th:object=${user}>
 			<div class="h1 mt-4">[[*{name}]]様の情報</div>
-			<div class="alert alert-danger w-100" th:if="${msg}" th:text="${msg}"></div>
+			<div th:replace="layout::msg"></div>
 			<p>ユーザー名：[[*{name}]]</p>
 			<p>登録日時：[[*{#calendars.format(createDate, 'yyyy年M月d日 k時m分s秒')}]]</p>
 			<p>更新日時：[[*{#calendars.format(updateDate, 'yyyy年M月d日 k時m分s秒')}]]</p>

@@ -6,7 +6,7 @@
 	<div class="container">
 		<div th:replace="layout::jumbotron"></div>
 		<div class="h1 my-4">投稿一覧</div>
-		<div class="alert alert-danger w-100" th:if="${msg}" th:text="${msg}"></div>
+		<div th:replace="layout::msg"></div>
 		<form th:action="@{/browseSort}" method="post">
 			<div th:replace="layout::sort"></div>
 			<p><button class="btn btn-success shadow mt-2" type="submit" name="sortBtn" value="browse">並べ替え</button></p>

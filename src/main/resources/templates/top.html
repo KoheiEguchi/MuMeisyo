@@ -6,7 +6,7 @@
 	<div class="container">
 		<div th:replace="layout::jumbotron"></div>
 		<div class="h1 mt-4" th:inline="text">ようこそ<span th:text="${name}"></span>様</div>
-		<div class="alert alert-danger w-100" th:if="${msg}" th:text="${msg}"></div>
+		<div th:replace="layout::msg"></div>
 		<div class="h2 my-4">最新の投稿</div>
 		<div class="row row-eq-height">
 			<div class="col-md-4 col-xs-12 placesPadding" th:inline="text" th:each="place: ${newPlaceList}" th:object="${place}">

@@ -26,6 +26,11 @@ div, p {
 	outline: none;
 }
 
+/* メッセージの✖クリック時に周りの青枠消す */
+.close:active {
+	outline: none;
+}
+
 /* ジャンボトロン設定 */
 .jumbotron {
 	background-image: url("/pic/title.jpg");
@@ -96,6 +101,7 @@ div, p {
 	}
 }
 
+/* 投稿画面での画像選択ボタンデザイン用 */
 .postPicBtn > input {
 	display: none;
 }
