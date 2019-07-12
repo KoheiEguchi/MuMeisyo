@@ -91,8 +91,8 @@ div, p {
 }
 @media screen and (max-width: 500px) {
 	.detailPic {
-		width: 100%;
-		height: 150%;
+		width: 300px;
+		height: 450px;
 	}
 }
 
