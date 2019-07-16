@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout::head('ご意見')"></head>
+<body>
+	<div th:replace="layout::header"></div>
+	<div class="container">
+		<div th:replace="layout::jumbotron"></div>
+		<div class="row">
+			<div class="col-md-2 col-xs-1"></div>
+			<div class="col-md-8 col-xs-10">
+				<div th:if="${admin == null}">
+					<div class="h1 mt-4">ご意見はこちらから</div>
+					<div th:replace="layout::msg"></div>
+					<form th:action="@{/forumPost}" th:method="post">
+						<p>メールアドレス(任意)</p>
+						<input type="text" name="address" placeholder="◯◯◯@example.com">
+						<p>ご意見内容</p>
+						<textarea class="postDesc" name="forum" placeholder="ご意見等ございましたらこちらへご記入ください。"></textarea>
+						<br>
+						<input class="btn btn-primary shadow my-4" type="submit" value="投稿">
+					</form>
+				</div>
+				<div th:if="${admin != null}">
+					<div class="h1 mt-4">投稿されたご意見一覧</div>
+					<div th:each="forum: ${forumList}" th:object="${forum}">
+						<p>投稿日時：[[*{#calendars.format(forumDate, 'yyyy年M月d日 k時m分s秒')}]]</p>
+						<p>メールアドレス：<span th:if="*{address != ''}">[[*{address}]]</span><span th:if="*{address == ''}">なし</span></p>
+						<p>ご意見：[[*{forum}]]</p>
+						<br>
+					</div>
+				</div>
+				<a th:href="@{/top}"><input class="btn btn-success shadow" type="button" value="戻る"></a>
+			</div>
+			<div class="col-md-2 col-xs-1"></div>
+		</div>
+	</div>
+	<div th:replace="layout::footer"></div>
+</body>
+</html>

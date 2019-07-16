@@ -46,6 +46,21 @@ public class Common {
 		return check;
 	}
 	
+	//管理人以外トップページへ送る
+	public boolean adminCheck(Model model) {
+		boolean check = false;
+		long userId = (long)session.getAttribute("userId");
+		if(userId != 1) {
+			model.addAttribute("msg", "そのページは管理人以外閲覧できません。");
+			check = false;
+		}else {
+			//セッション読み込み
+			sessionSet(model);
+			check = true;
+		}
+		return check;
+	}
+	
 	//セッション読み込み
 	public void sessionSet(Model model) {
 		//セッションのID読み込み

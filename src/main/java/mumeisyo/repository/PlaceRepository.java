@@ -36,7 +36,7 @@ public interface PlaceRepository extends JpaRepository<Place, Long> {
 	
 	//指定された投稿の詳細を取得
 	@Query(value = "SELECT * FROM place WHERE id = :id", nativeQuery = true)
-	public List<Place> getPlaceDetail(long id);
+	public List<Place> getPostDetail(long id);
 	
 	//自分の投稿か確認
 	@Query(value = "SELECT user_id FROM place WHERE id = :id", nativeQuery = true)
@@ -55,4 +55,9 @@ public interface PlaceRepository extends JpaRepository<Place, Long> {
 	@Modifying
 	@Query(value = "UPDATE place SET good = good + 1 WHERE id = :id", nativeQuery = true)
 	public void goodNumPlus(long id);
+	
+	//投稿削除
+	@Modifying
+	@Query(value = "DELETE FROM place WHERE id = :id", nativeQuery = true)
+	public void postDelete(long id);
 }

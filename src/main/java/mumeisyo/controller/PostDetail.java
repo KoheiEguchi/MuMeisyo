@@ -16,7 +16,7 @@ import mumeisyo.repository.PlaceRepository;
 import mumeisyo.service.Common;
 
 @Controller
-public class PlaceDetail {
+public class PostDetail {
 	@Autowired
 	PlaceRepository placeRep;
 	@Autowired
@@ -25,11 +25,11 @@ public class PlaceDetail {
 	Common common;
 	
 	//指定された投稿の詳細を表示
-	@RequestMapping(value = "/placeDetail", method = RequestMethod.GET)
-	public String placeDetailOpen(@RequestParam("id")long id, @RequestParam("userId")long userId, Model model) {
+	@RequestMapping(value = "/postDetail", method = RequestMethod.GET)
+	public String postDetailOpen(@RequestParam("id")long id, @RequestParam("userId")long userId, Model model) {
 		//投稿内容
-		List<Place> placeDetail = placeRep.getPlaceDetail(id);
-		model.addAttribute("placeDetail", placeDetail);
+		List<Place> postDetail = placeRep.getPostDetail(id);
+		model.addAttribute("postDetail", postDetail);
 		//高評価者一覧
 		List<Good> goodUsers = goodRep.getGoodUsers(id);
 		model.addAttribute("goodUsers", goodUsers);
@@ -47,6 +47,6 @@ public class PlaceDetail {
 				common.sessionSet(model);
 			}
 		}
-		return "placeDetail";
+		return "postDetail";
 	}
 }

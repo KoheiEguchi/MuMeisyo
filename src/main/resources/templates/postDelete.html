@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout::head('投稿削除')"></head>
+<body>
+	<div th:replace="layout::header"></div>
+	<div class="container">
+		<div th:replace="layout::jumbotron"></div>
+		<div class="h1 mt-5">この投稿を本当に<span class="text-danger">削除</span>しますか？</div>
+		<div th:each="post: ${deletePost}" th:object="${post}">
+			投稿者：[[*{name}]]様
+			<p>[[*{#calendars.format(postDate, 'yyyy年M月d日 k時m分s秒')}]]</p>
+			<div th:if="*{pic == null}">
+				<p>写真なし</p>
+				<img class="detailPic" th:src="@{/pic/noImg.jpg}" th:alt="画像なし">
+			</div>
+			<div th:if="*{pic != null}">
+				<p><br></p>
+				<img class="detailPic" th:src="@{/__*{pic}__}" th:alt="投稿された画像">
+			</div>
+			<p>[[*{text}]]</p>
+			<p>高評価数：[[*{good}]]</p>
+			<a th:href="@{/deletePostOk(placeId=*{id})}"><input class="btn btn-danger shadow mt-5" type="button" value="削除する(戻せません！)"></a>
+			<br>
+			<a th:href="@{/postDetail(id=*{id}, userId=${userId})}"><input class="btn btn-success shadow my-4" type="button" value="戻る"></a>
+		</div>
+	</div>
+	<div th:replace="layout::footer"></div>
+</body>
+</html>

@@ -16,35 +16,24 @@ import lombok.NoArgsConstructor;
 
 @Entity
 
-//アクセサを内蔵
 @Data
-//コンストラクタを内蔵
 @AllArgsConstructor
 @NoArgsConstructor
 
 @Table(name="mumeisyo")
-public class User {	
-	//セッション取得用
-	public User(long id) {
-		this.id = id;
-	}
-	
+public class Forum {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id")
 	private long id;
 	
-	@NotNull
-	@Column(name="name")
-	private String name;
+	@Column(name="address")
+	private String address;
 	
 	@NotNull
-	@Column(name="password")
-	private String password;
+	@Column(name="forum")
+	private String forum;
 	
-	@Column(name="create_date")
-	private Timestamp createDate;
-	
-	@Column(name="update_date")
-	private Timestamp updateDate;
+	@Column(name="forum_date")
+	private Timestamp forumDate;
 }

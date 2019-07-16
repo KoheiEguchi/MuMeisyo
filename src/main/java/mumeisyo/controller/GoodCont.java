@@ -14,7 +14,7 @@ import mumeisyo.repository.PlaceRepository;
 import mumeisyo.service.Common;
 
 @Controller
-public class Good {
+public class GoodCont {
 	@Autowired
 	GoodRepository goodRep;
 	@Autowired

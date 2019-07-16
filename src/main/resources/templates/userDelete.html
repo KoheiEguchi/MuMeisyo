@@ -5,12 +5,9 @@
 	<div th:replace="layout::header"></div>
 	<div class="container">
 		<div class="h1 mt-5">本当に<span class="text-danger">退会</span>しますか？</div>
-		<div class="mt-5">
-			<a th:href="@{/deleteAction}"><input class="btn btn-danger shadow" type="button" value="退会する(戻せません！)"></a>
-		</div>
-		<div class="my-4">
-			<a th:href="@{/userDetail}"><input class="btn btn-success shadow" type="button" value="戻る"></a>
-		</div>
+		<a th:href="@{/deleteAction}"><input class="btn btn-danger shadow mt-5" type="button" value="退会する(戻せません！)"></a>
+		<br>
+		<a th:href="@{/userDetail}"><input class="btn btn-success shadow my-4" type="button" value="戻る"></a>
 	</div>
 	<div th:replace="layout::footer"></div>
 </body>

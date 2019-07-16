@@ -6,7 +6,10 @@ body {
     height: 100%;
 	padding-top: 50px;
 	padding-bottom: 50px;
-	background: #98fb98;
+	/* background: #98fb98; */
+	background-image: url("/pic/back.png");
+	background-repeat: no-repeat;
+	background-size: cover;
 }
 
 /* 文を原則中央配置にする */

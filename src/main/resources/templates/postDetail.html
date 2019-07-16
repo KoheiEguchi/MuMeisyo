@@ -1,14 +1,13 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="layout::head('投稿一覧')"></head>
-</head>
 <body>
 	<div th:replace="layout::header"></div>
 	<div class="container">
 		<div th:replace="layout::jumbotron"></div>
 		<div class="h1 mt-4">投稿の詳細</div>
 		<div th:replace="layout::msg"></div>
-		<div th:inline="text" th:each="place: ${placeDetail}" th:object="${place}">
+		<div th:inline="text" th:each="place: ${postDetail}" th:object="${place}">
 			<a class="userLink" th:href="@{/otherUserDetail(userId=*{userId})}">投稿者：[[*{name}]]様</a>
 			<p>[[*{#calendars.format(postDate, 'yyyy年M月d日 k時m分s秒')}]]</p>
 			<div th:if="*{pic == null}">
@@ -33,6 +32,9 @@
 			</div>
 			<div th:if="${myPost != null}">
 				<button class="btn btn-info" disabled="disabled">あなたの投稿です</button>
+			</div>
+			<div th:if="${userId == 1}">
+				<a th:href="@{/postDelete(placeId=*{id})}"><input class="btn btn-danger shadow my-4" type="button" value="この投稿を削除する"></a>
 			</div>
 		</div>
 		<div th:inline="text" th:each="user: ${goodUsers}" th:object="${user}">
