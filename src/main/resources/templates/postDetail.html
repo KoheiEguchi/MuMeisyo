@@ -36,9 +36,22 @@
 			<div th:if="${userId == 1}">
 				<a th:href="@{/postDelete(placeId=*{id})}"><input class="btn btn-danger shadow my-4" type="button" value="この投稿を削除する"></a>
 			</div>
-		</div>
-		<div th:inline="text" th:each="user: ${goodUsers}" th:object="${user}">
-			<p>[[*{name}]]様が高評価しました。([[*{#calendars.format(goodDate, 'yyyy年M月d日 k時m分s秒')}]])</p>
+			<div th:inline="text" th:each="user: ${goodUsers}" th:object="${user}">
+				<p>[[*{name}]]様が高評価しました。([[*{#calendars.format(goodDate, 'yyyy年M月d日 k時m分s秒')}]])</p>
+			</div>
+			<p class="mt-4">この投稿へのコメント</p>
+			<div th:inline="text" th:each="comment: ${commentList}" th:object="${comment}">
+				<p>投稿者：[[*{name}]]様</p>
+				<p>投稿日時：[[*{#calendars.format(commentDate, 'yyyy年M月d日 k時m分s秒')}]]</p>
+				<p>コメント：[[*{comment}]]</p>
+				<br>
+			</div>
+			<form th:action="@{/comment}" method="post">
+				<textarea class="mt-5 postComment" name="comment" placeholder="この投稿へのコメント等お書きください。"></textarea>
+				<input type="hidden" name="placeId" th:value=*{id}>
+				<br>
+				<input class="btn btn-primary shadow my-2" type="submit" value="書き込む">
+			</form>
 		</div>
 		<a th:href="@{/top}"><input class="btn btn-success shadow my-4" type="button" value="戻る"></a>
 	</div>

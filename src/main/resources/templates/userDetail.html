@@ -16,7 +16,7 @@
 		<div class="row row-eq-height">
 			<div class="col-md-3 col-xs-6 placesPadding" th:inline="text" th:each="place: ${placeList}" th:object=${place}>
 				<a class="detailLink" th:href="@{/postDetail(id=*{id},userId=${userId})}">
-					<div class="detailLinkArea">
+					<div class="py-2 detailLinkArea">
 						<p>[[*{#calendars.format(postDate, 'yyyy年M月d日 k時m分s秒')}]]</p>
 						<div th:if="*{pic == null}">
 							<p>写真なし</p>

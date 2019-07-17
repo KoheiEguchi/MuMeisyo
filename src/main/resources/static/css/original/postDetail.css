@@ -1,0 +1,30 @@
+@charset "UTF-8";
+
+/* 詳細画面での画像の大きさ設定 */
+.detailPic {
+	width: 500px;
+	height: 750px;
+}
+@media screen and (max-width: 500px) {
+	.detailPic {
+		width: 300px;
+		height: 450px;
+	}
+}
+
+/* 投稿へのコメント記入欄設定 */
+.postComment {
+	width: 50%;
+	height: 250px;
+}
+@media screen and (max-width: 500px) {
+	.postComment {
+		width: 100%;
+		height: 250px;
+	}
+}
+
+/* 投稿画面での画像選択ボタンデザイン用 */
+.postPicBtn > input {
+	display: none;
+}

@@ -14,7 +14,7 @@ import mumeisyo.model.Good;
 @Repository
 public interface GoodRepository extends JpaRepository<Good, Long> {
 	//高評価者一覧
-	@Query(value = "SELECT * FROM good WHERE place_id = :place_id", nativeQuery = true)
+	@Query(value = "SELECT * FROM good WHERE place_id = :place_id ORDER BY good_date DESC", nativeQuery = true)
 	public List<Good> getGoodUsers(long place_id);
 	
 	//すでに高評価しているか確認

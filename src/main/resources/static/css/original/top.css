@@ -1,0 +1,7 @@
+@charset "UTF-8";
+
+/* トップ画面での画像の大きさ設定 */
+.topPic {
+	width: 300px;
+	height: 450px;
+}
