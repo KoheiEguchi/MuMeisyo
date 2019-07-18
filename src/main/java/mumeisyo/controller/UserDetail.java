@@ -25,40 +25,20 @@ public class UserDetail {
 	@Autowired
 	Common common;
 	
-	//自分の情報ページを表示
+	//他ユーザーの情報ページを表示
 	@RequestMapping(value = "/userDetail", method = RequestMethod.GET)
-	public String userDetailOpen(Model model) {
+	public String userDetailOpen(@RequestParam("userId")long userId, Model model) {
 		//ログインしていない場合ログインページへ送る
 		boolean check = common.loginCheck(model);
 		if(check == false) {
 			return "login";
 		}else {
-			long userId = (long)session.getAttribute("userId");
 			//ユーザー情報と投稿履歴を取得する
 			common.getUserDetail(userId, model);
-			//情報変更欄表示用
+			//セッション読み込み
+			common.sessionSet(model);
+			
 			model.addAttribute("myData", "myData");
-			
-			//セッション読み込み
-			common.sessionSet(model);
-			return "userDetail";
-		}
-	}
-	
-	//他ユーザーの情報ページを表示
-	@RequestMapping(value = "/otherUserDetail", method = RequestMethod.GET)
-	public String otherUserDetail(@RequestParam("userId")long userId, Model model) {
-		long sessionUserId = (long)session.getAttribute("userId");
-		//自分の情報ページへ行く場合
-		if(userId == sessionUserId) {
-			userDetailOpen(model);
-		//他ユーザーの場合
-		}else {
-			//ユーザー情報と投稿履歴を取得する
-			common.getUserDetail(userId, model);
-			
-			//セッション読み込み
-			common.sessionSet(model);
 		}
 		return "userDetail";
 	}
@@ -82,7 +62,8 @@ public class UserDetail {
 			}
 			checkName.clear();
 		}
-		userDetailOpen(model);
+		long userId = (long)session.getAttribute("userId");
+		userDetailOpen(userId, model);
 		return "userDetail";
 	}
 	
@@ -113,7 +94,8 @@ public class UserDetail {
 				model.addAttribute("msg", "その名前はすでに使われています。");
 			}
 		}
-		userDetailOpen(model);
+		long userId = (long)session.getAttribute("userId");
+		userDetailOpen(userId, model);
 		return "userDetail";
 	}
 }

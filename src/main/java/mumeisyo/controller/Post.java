@@ -21,6 +21,8 @@ public class Post {
 	HttpSession session;
 	@Autowired
 	Common common;
+	@Autowired
+	Top top;
 		
 	//投稿ページを表示する
 	@RequestMapping(value = "/post", method = RequestMethod.GET)
@@ -50,10 +52,11 @@ public class Post {
 			
 			String name = (String)session.getAttribute("name");
 			long userId = (long)session.getAttribute("userId");
+			//新規投稿
 			placeRep.newPost(name, userId, picName, text);
 			model.addAttribute("msg", "投稿を受けつけました。");
-			//最新の投稿3件を取得
-			common.getNewPlaceList(model);
+			//トップに戻る
+			top.topOpen(model);
 			return "top";
 		}
 	}

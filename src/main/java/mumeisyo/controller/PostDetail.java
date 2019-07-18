@@ -55,9 +55,9 @@ public class PostDetail {
 			List<Good> didGoodCheck = goodRep.didGoodCheck(userId, id);
 			if(didGoodCheck.isEmpty()) {
 				model.addAttribute("noGood", "noGood");
-				common.sessionSet(model);
 			}
 		}
+		common.sessionSet(model);
 		return "postDetail";
 	}
 	

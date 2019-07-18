@@ -24,6 +24,8 @@ public class Login {
 	HttpSession session;
 	@Autowired
 	Common common;
+	@Autowired
+	Top top;
 	
 	//ログインページを表示する
 	@RequestMapping(value = {"/", "/login"}, method = RequestMethod.GET)
@@ -48,13 +50,11 @@ public class Login {
 				//セッションにIDを保存
 				long userId = userRep.getId(name, password);
 				session.setAttribute("userId", userId);
-				model.addAttribute("userId", userId);
 				//セッションに名前を保存
 				session.setAttribute("name", name);
-				model.addAttribute("name", name);
 				
-				//最新の投稿3件を取得
-				common.getNewPlaceList(model);
+				//トップに進む
+				top.topOpen(model);
 				return "top";
 			//存在しない場合
 			}else {

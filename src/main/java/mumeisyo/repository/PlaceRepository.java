@@ -40,7 +40,7 @@ public interface PlaceRepository extends JpaRepository<Place, Long> {
 	
 	//自分の投稿か確認
 	@Query(value = "SELECT user_id FROM place WHERE id = :id", nativeQuery = true)
-	public long myPostCheck(long id);
+	public int myPostCheck(long id);
 	
 	//ユーザーの投稿履歴取得
 	@Query(value = "SELECT * FROM place WHERE user_id = :user_id", nativeQuery = true)

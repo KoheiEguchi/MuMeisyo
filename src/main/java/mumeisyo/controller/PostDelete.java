@@ -19,6 +19,8 @@ public class PostDelete {
 	PlaceRepository placeRep;
 	@Autowired
 	Common common;
+	@Autowired
+	Top top;
 	
 	//投稿削除ページを開く
 	@RequestMapping(value = "postDelete", method = RequestMethod.GET)
@@ -42,7 +44,7 @@ public class PostDelete {
 	}
 	
 	//投稿を削除する
-	@RequestMapping(value = "deletePostOk", method = RequestMethod.GET)
+	@RequestMapping(value = "deletePostOk", method = RequestMethod.POST)
 	public String postDelete(@RequestParam("placeId") long placeId, Model model) {
 		//ログインしていない場合ログインページへ送る
 		boolean loginCheck = common.loginCheck(model);
@@ -58,10 +60,8 @@ public class PostDelete {
 				placeRep.postDelete(placeId);
 				model.addAttribute("msg", "削除しました。");
 				
-				//セッション読み込み
-				common.sessionSet(model);
-				//最新の投稿3件を取得
-				common.getNewPlaceList(model);
+				//トップに戻る
+				top.topOpen(model);
 				return "top";
 			}
 		}

@@ -8,7 +8,7 @@
 		<div class="h1 mt-4">投稿の詳細</div>
 		<div th:replace="layout::msg"></div>
 		<div th:inline="text" th:each="place: ${postDetail}" th:object="${place}">
-			<a class="userLink" th:href="@{/otherUserDetail(userId=*{userId})}">投稿者：[[*{name}]]様</a>
+			<a class="userLink" th:href="@{/userDetail(userId=*{userId})}">投稿者：[[*{name}]]様</a>
 			<p>[[*{#calendars.format(postDate, 'yyyy年M月d日 k時m分s秒')}]]</p>
 			<div th:if="*{pic == null}">
 				<p>写真なし</p>
@@ -25,9 +25,12 @@
 					<button class="btn btn-secondary" disabled="disabled">高評価済み</button>
 				</div>
 				<div th:if="${noGood != null}">
-					<object>
-						<a th:href="@{/good(id=*{id},name=${name},userId=${userId})}"><input class="btn btn-warning shadow" type="button" value="高評価する"></a>
-					</object>
+					<form th:action="@{/good}" method="post">
+						<input type="hidden" name="id" th:value="*{id}">
+						<input type="hidden" name="name" th:value="${name}">
+						<input type="hidden" name="userId" th:value="${userId}">
+						<input class="btn btn-warning shadow" type="submit" value="高評価する">
+					</form>
 				</div>
 			</div>
 			<div th:if="${myPost != null}">

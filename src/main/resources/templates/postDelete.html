@@ -19,7 +19,10 @@
 			</div>
 			<p>[[*{text}]]</p>
 			<p>高評価数：[[*{good}]]</p>
-			<a th:href="@{/deletePostOk(placeId=*{id})}"><input class="btn btn-danger shadow mt-5" type="button" value="削除する(戻せません！)"></a>
+			<form th:action="@{/deletePostOk}" method="post">
+				<input type="hidden" name="placeId" th:value="*{id}">
+				<input class="btn btn-danger shadow mt-5" type="submit" value="削除する(戻せません！)">
+			</form>
 			<br>
 			<a th:href="@{/postDetail(id=*{id}, userId=${userId})}"><input class="btn btn-success shadow my-4" type="button" value="戻る"></a>
 		</div>
