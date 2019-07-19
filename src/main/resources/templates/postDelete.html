@@ -11,7 +11,7 @@
 			<p>[[*{#calendars.format(postDate, 'yyyy年M月d日 k時m分s秒')}]]</p>
 			<div th:if="*{pic == null}">
 				<p>写真なし</p>
-				<img class="detailPic" th:src="@{/pic/noImg.jpg}" th:alt="画像なし">
+				<img class="detailPic" th:src="@{/pic/layout/noImg.jpg}" th:alt="画像なし">
 			</div>
 			<div th:if="*{pic != null}">
 				<p><br></p>

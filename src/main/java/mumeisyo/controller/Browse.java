@@ -29,8 +29,9 @@ public class Browse {
 		if(check == false) {
 			return "login";
 		}else {
-			List<Place> placeList = placeRep.getPlace();
+			List<Place> placeList = placeRep.getPlaceNew();
 			model.addAttribute("placeList", placeList);
+			model.addAttribute("sortResult", "新しい順");
 			
 			//セッション読み込み
 			common.sessionSet(model);
@@ -43,17 +44,21 @@ public class Browse {
 	public String browseSort(@RequestParam("sort")String sort, Model model) throws SQLException {
 		List<Place> placeList = null;
 		switch(sort) {
-		case "old":
-			placeList = placeRep.getPlaceOld();
-			break;
 		case "new":
 			placeList = placeRep.getPlaceNew();
+			model.addAttribute("sortResult", "新しい順");
+			break;
+		case "old":
+			placeList = placeRep.getPlaceOld();
+			model.addAttribute("sortResult", "古い順");
 			break;
 		case "good":
 			placeList = placeRep.getPlaceGood();
+			model.addAttribute("sortResult", "評価の多い順");
 			break;
 		case "bad":
 			placeList = placeRep.getPlaceBad();
+			model.addAttribute("sortResult", "評価の少ない順");
 			break;
 		}
 		model.addAttribute("placeList", placeList);

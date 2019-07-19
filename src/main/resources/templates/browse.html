@@ -5,7 +5,7 @@
 	<div th:replace="layout::header"></div>
 	<div class="container">
 		<div th:replace="layout::jumbotron"></div>
-		<div class="h1 my-4">投稿一覧</div>
+		<div class="h1 my-4">投稿一覧([[${sortResult}]])</div>
 		<div th:replace="layout::msg"></div>
 		<form th:action="@{/browseSort}" method="post">
 			<div th:replace="layout::sort"></div>
@@ -19,7 +19,7 @@
 						<p>[[*{#calendars.format(postDate, 'yyyy年M月d日 k時m分s秒')}]]</p>
 						<div th:if="*{pic == null}">
 							<p>写真なし</p>
-							<img class="thumbnail" th:src="@{/pic/noImg.jpg}" th:alt="画像なし">
+							<img class="thumbnail" th:src="@{/pic/layout/noImg.jpg}" th:alt="画像なし">
 						</div>
 						<div th:if="*{pic != null}">
 							<p><br></p>

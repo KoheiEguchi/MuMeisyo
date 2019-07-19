@@ -6,8 +6,7 @@ body {
     height: 100%;
 	padding-top: 50px;
 	padding-bottom: 50px;
-	/* background: #98fb98; */
-	background-image: url("/pic/back.png");
+	background-image: url("/pic/layout/background.png");
 	background-repeat: no-repeat;
 	background-size: cover;
 }
@@ -24,7 +23,7 @@ div, p {
 
 /* ジャンボトロン設定 */
 .jumbotron {
-	background-image: url("/pic/title.jpg");
+	background-image: url("/pic/layout/title.jpg");
 	background-size: cover;
 	background-position: center 60%;
 }

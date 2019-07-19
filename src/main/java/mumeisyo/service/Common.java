@@ -83,17 +83,18 @@ public class Common {
 		String picName = null;
 		//画像が指定された場合
 		if(!(pic.isEmpty())) {
-			//画像保存フォルダをインスタンス化
-			Path path = Paths.get("pic");
-			//保存フォルダインスタンスが重複していない場合
+			//画像保存フォルダが存在しない場合
+			Path path = Paths.get("src/main/resources/static/pic/post");
 			if(!(Files.exists(path))) {
 				try {
+					//保存フォルダを作成
 					Files.createDirectory(path);
 				}catch(NoSuchFileException ne) {
 					ne.printStackTrace();
 				}catch(IOException ie) {
 					ie.printStackTrace();
 				}
+			//保存フォルダが存在するならそのまま
 			}
 			
 			//拡張子取得のためドットの位置を取得
@@ -106,11 +107,11 @@ public class Common {
 			//現在日時からファイル名生成
 			String fileName = DateTimeFormatter.ofPattern("yyyyMMddHHmmssSSS").format(LocalDateTime.now());
 			//ファイル名と拡張子を組み合わせ格納場所も指定
-			picName = "pic/" + fileName + extention;
+			picName = "pic/post/" + fileName + extention;
 			Path uploadFile = Paths.get(picName);
 			
 			//画像を指定された場所に保存
-			try(OutputStream os = Files.newOutputStream(uploadFile, StandardOpenOption.CREATE)) {
+			try(OutputStream os = Files.newOutputStream(uploadFile, StandardOpenOption.CREATE)) { //ここでcatchに送られNoSuchFileExceptionを出す
 				byte[] bytes = pic.getBytes();
 				os.write(bytes);
 			}catch(IOException e) {
