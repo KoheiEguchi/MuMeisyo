@@ -5,8 +5,8 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -25,7 +25,7 @@ public class Post {
 	Top top;
 		
 	//投稿ページを表示する
-	@RequestMapping(value = "/post", method = RequestMethod.GET)
+	@GetMapping("/post")
 	public String postOpen(Model model) {
 		//ログインしていない場合ログインページへ送る
 		boolean check = common.loginCheck(model);
@@ -37,11 +37,13 @@ public class Post {
 	}
 	
 	//投稿する
-	@RequestMapping(value = "/post", method = RequestMethod.POST)
+	@PostMapping("/postAction")
 	public String post(@RequestParam("pic")MultipartFile pic, @RequestParam("text")String text, Model model) {
 		//説明が空欄の場合
 		if(text.equals("")) {
 			model.addAttribute("msg", "説明を入力してください。");
+			//セッション読み込み
+			common.sessionGet(model);
 			return "post";
 		//空欄でない場合
 		}else {

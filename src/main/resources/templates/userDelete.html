@@ -5,9 +5,11 @@
 	<div th:replace="layout::header"></div>
 	<div class="container">
 		<div class="h1 mt-5">本当に<span class="text-danger">退会</span>しますか？</div>
-		<a th:href="@{/deleteAction}"><input class="btn btn-danger shadow mt-5" type="button" value="退会する(戻せません！)"></a>
+		<form th:action="@{/userDeleteAction}" method="post">
+			<input class="btn btn-danger shadow mt-5" type="submit" value="退会する(戻せません！)">
+		</form>
 		<br>
-		<a th:href="@{/userDetail}"><input class="btn btn-success shadow my-4" type="button" value="戻る"></a>
+		<a th:href="@{/userDetail(userId=${userId})}"><input class="btn btn-success shadow my-4" type="button" value="戻る"></a>
 	</div>
 	<div th:replace="layout::footer"></div>
 </body>

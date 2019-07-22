@@ -16,9 +16,7 @@ import lombok.NoArgsConstructor;
 
 @Entity
 
-//アクセサを内蔵
 @Data
-//コンストラクタを内蔵
 @AllArgsConstructor
 @NoArgsConstructor
 
@@ -47,4 +45,7 @@ public class User {
 	
 	@Column(name="update_date")
 	private Timestamp updateDate;
+	
+	@Column(name="greet")
+	private String greet;
 }

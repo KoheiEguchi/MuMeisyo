@@ -40,7 +40,7 @@ public class Common {
 			check = false;
 		}else {
 			//セッション読み込み
-			sessionSet(model);
+			sessionGet(model);
 			check = true;
 		}
 		return check;
@@ -55,14 +55,14 @@ public class Common {
 			check = false;
 		}else {
 			//セッション読み込み
-			sessionSet(model);
+			sessionGet(model);
 			check = true;
 		}
 		return check;
 	}
 	
 	//セッション読み込み
-	public void sessionSet(Model model) {
+	public void sessionGet(Model model) {
 		//セッションのID読み込み
 		long userId = (long)session.getAttribute("userId");
 		model.addAttribute("userId", userId);
@@ -106,12 +106,12 @@ public class Common {
 			}
 			//現在日時からファイル名生成
 			String fileName = DateTimeFormatter.ofPattern("yyyyMMddHHmmssSSS").format(LocalDateTime.now());
-			//ファイル名と拡張子を組み合わせ格納場所も指定
+			//ファイル名と拡張子を組み合わせる
 			picName = "pic/post/" + fileName + extention;
-			Path uploadFile = Paths.get(picName);
-			
+			//保存場所を指定する
+			Path uploadFile = Paths.get("src/main/resources/static/" + picName);
 			//画像を指定された場所に保存
-			try(OutputStream os = Files.newOutputStream(uploadFile, StandardOpenOption.CREATE)) { //ここでcatchに送られNoSuchFileExceptionを出す
+			try(OutputStream os = Files.newOutputStream(uploadFile, StandardOpenOption.CREATE)) {
 				byte[] bytes = pic.getBytes();
 				os.write(bytes);
 			}catch(IOException e) {

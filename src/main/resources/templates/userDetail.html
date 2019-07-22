@@ -8,29 +8,44 @@
 		<div th:inline="text" th:each="user: ${userData}" th:object=${user}>
 			<div class="h1 mt-4">[[*{name}]]様の情報</div>
 			<div th:replace="layout::msg"></div>
-			<p>ユーザー名：[[*{name}]]</p>
-			<p>登録日時：[[*{#calendars.format(createDate, 'yyyy年M月d日 k時m分s秒')}]]</p>
-			<p>更新日時：[[*{#calendars.format(updateDate, 'yyyy年M月d日 k時m分s秒')}]]</p>
+			<div th:if="${newUserDetail == null}">
+				<p>ユーザー名：[[*{name}]]</p>
+				<p>登録日時：[[*{#calendars.format(createDate, 'yyyy年M月d日 k時m分s秒')}]]</p>
+				<p>更新日時：[[*{#calendars.format(updateDate, 'yyyy年M月d日 k時m分s秒')}]]</p>
+				<div th:if="${myData != null}">
+					<form th:action="greet" method="post">
+						<p>
+							一言：<input type="text" name="greet" th:value=*{greet} placeholder="ご自由に一言どうぞ">
+							<input class="btn btn-primary shadow ml-2" type="submit" value="変更">
+						</p>
+					</form>
+				</div>
+				<div th:if="${myData == null}">
+					<p>一言：<span th:if="*{greet == null}">なし</span>[[*{greet}]]</p>
+				</div>
+			</div>
 		</div>
-		<div class="h2 my-4">投稿履歴</div>
-		<div class="row row-eq-height">
-			<div class="col-md-3 col-xs-6 placesPadding" th:inline="text" th:each="place: ${placeList}" th:object=${place}>
-				<a class="detailLink" th:href="@{/postDetail(id=*{id},userId=${userId})}">
-					<div class="py-2 detailLinkArea">
-						<p>[[*{#calendars.format(postDate, 'yyyy年M月d日 k時m分s秒')}]]</p>
-						<div th:if="*{pic == null}">
-							<p>写真なし</p>
-							<img class="thumbnail" th:src="@{/pic/layout/noImg.jpg}" th:alt="画像なし">
+		<div th:if="${newUserDetail == null}">
+			<div class="h2 my-4">投稿履歴</div>
+			<div class="row row-eq-height">
+				<div class="col-md-3 col-xs-6 placesPadding" th:inline="text" th:each="place: ${placeList}" th:object=${place}>
+					<a class="detailLink" th:href="@{/postDetail(id=*{id},userId=${userId})}">
+						<div class="py-2 detailLinkArea">
+							<p>[[*{#calendars.format(postDate, 'yyyy年M月d日 k時m分s秒')}]]</p>
+							<div th:if="*{pic == null}">
+								<p>写真なし</p>
+								<img class="thumbnail" th:src="@{/pic/layout/noImg.jpg}" th:alt="画像なし">
+							</div>
+							<div th:if="*{pic != null}">
+								<p><br></p>
+								<img class="thumbnail" th:src="@{/__*{pic}__}" th:alt="投稿された画像">
+							</div>
+							<p class="textShort">[[*{text}]]</p>
+							<p>高評価数：<span th:text="*{good}"></span></p>
 						</div>
-						<div th:if="*{pic != null}">
-							<p><br></p>
-							<img class="thumbnail" th:src="@{/__*{pic}__}" th:alt="投稿された画像">
-						</div>
-						<p class="textShort">[[*{text}]]</p>
-						<p>高評価数：<span th:text="*{good}"></span></p>
-					</div>
-				</a>
-				<br>
+					</a>
+					<br>
+				</div>
 			</div>
 		</div>
 		<a th:href="@{/top}"><input class="btn btn-success shadow" type="button" value="戻る"></a>
@@ -39,7 +54,7 @@
 			<div th:if="${newUserDetail == null}">
 				<form th:action="@{/userDetailCheck}" method="post">
 					<p>パスワード</p>
-					<input type="password" name="password">
+					<input type="password" name="password" placeholder="パスワード">
 					<input class="btn btn-primary shadow my-3" type="submit" value="確認">
 				</form>
 			</div>

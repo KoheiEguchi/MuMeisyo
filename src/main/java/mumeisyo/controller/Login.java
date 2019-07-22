@@ -8,8 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.CollectionUtils;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import mumeisyo.model.User;
@@ -28,13 +28,13 @@ public class Login {
 	Top top;
 	
 	//ログインページを表示する
-	@RequestMapping(value = {"/", "/login"}, method = RequestMethod.GET)
+	@GetMapping({"/", "/login"})
 	public String loginOpen() {
 		return "login";
 	}
 	
 	//ログインを確認する
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	@PostMapping("/login")
 	public String login(@RequestParam("name")String name, @RequestParam("password")String password, Model model) {
 		//空欄がある場合
 		if(name == "" || password == "") {

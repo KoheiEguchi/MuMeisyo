@@ -7,8 +7,8 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import mumeisyo.model.Place;
@@ -33,7 +33,7 @@ public class PostDetail {
 	HttpSession session;
 	
 	//指定された投稿の詳細を表示する
-	@RequestMapping(value = "/postDetail", method = RequestMethod.GET)
+	@GetMapping("/postDetail")
 	public String postDetailOpen(@RequestParam("id")long id, @RequestParam("userId")long userId, Model model) {
 		//投稿内容
 		List<Place> postDetail = placeRep.getPostDetail(id);
@@ -44,6 +44,10 @@ public class PostDetail {
 		//コメント一覧
 		List<Comment> commentList = commentRep.getComment(id);
 		model.addAttribute("commentList", commentList);
+		//コメントがない場合
+		if(commentList.isEmpty()) {
+			model.addAttribute("noComment", "まだコメントはありません。");
+		}
 		//自分の投稿か確認
 		long myPostCheck = placeRep.myPostCheck(id);
 		//自分の投稿だった場合
@@ -57,12 +61,12 @@ public class PostDetail {
 				model.addAttribute("noGood", "noGood");
 			}
 		}
-		common.sessionSet(model);
+		common.sessionGet(model);
 		return "postDetail";
 	}
 	
 	//コメントを投稿する
-	@RequestMapping(value = "/comment", method = RequestMethod.POST)
+	@PostMapping("/comment")
 	public String comment(@RequestParam("placeId") long placeId, @RequestParam("comment") String comment, Model model) {
 		long userId = (long)session.getAttribute("userId");
 		

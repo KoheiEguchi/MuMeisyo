@@ -43,6 +43,7 @@
 				<p>[[*{name}]]様が高評価しました。([[*{#calendars.format(goodDate, 'yyyy年M月d日 k時m分s秒')}]])</p>
 			</div>
 			<p class="mt-4">この投稿へのコメント</p>
+			<div th:if="${noComment != null}">[[${noComment}]]</div>
 			<div th:inline="text" th:each="comment: ${commentList}" th:object="${comment}">
 				<p>投稿者：[[*{name}]]様</p>
 				<p>投稿日時：[[*{#calendars.format(commentDate, 'yyyy年M月d日 k時m分s秒')}]]</p>

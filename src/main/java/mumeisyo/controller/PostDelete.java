@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import mumeisyo.model.Place;
@@ -23,7 +23,7 @@ public class PostDelete {
 	Top top;
 	
 	//投稿削除ページを開く
-	@RequestMapping(value = "postDelete", method = RequestMethod.GET)
+	@GetMapping("/postDelete")
 	public String postDeleteOpen(@RequestParam("placeId") long placeId, Model model){
 		//ログインしていない場合ログインページへ送る
 		boolean loginCheck = common.loginCheck(model);
@@ -44,7 +44,7 @@ public class PostDelete {
 	}
 	
 	//投稿を削除する
-	@RequestMapping(value = "deletePostOk", method = RequestMethod.POST)
+	@PostMapping("/deletePostOk")
 	public String postDelete(@RequestParam("placeId") long placeId, Model model) {
 		//ログインしていない場合ログインページへ送る
 		boolean loginCheck = common.loginCheck(model);

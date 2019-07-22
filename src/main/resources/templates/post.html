@@ -10,7 +10,7 @@
 			<div class="col-md-8 col-xs-10">
 				<div class="h1 mt-4">投稿</div>
 				<div th:replace="layout::msg"></div>
-				<form th:action="@{/post}" method="post" enctype="multipart/form-data">
+				<form th:action="@{/postAction}" method="post" enctype="multipart/form-data">
 					<p>写真(任意)</p>
 					<label class="btn btn-warning shadow my-2 postPicBtn">画像ファイルを選択してください
 						<input id="file" type="file" name="pic" accept="image/*" onChange="$('#fileName').val($(this).prop('files')[0].name)">

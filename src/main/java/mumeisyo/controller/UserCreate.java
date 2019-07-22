@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.CollectionUtils;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import mumeisyo.model.User;
@@ -19,13 +19,13 @@ public class UserCreate {
 	UserRepository userRep;
 	
 	//登録ページを表示する
-	@RequestMapping(value = "/userCreate", method = RequestMethod.GET)
+	@GetMapping("/userCreate")
 	public String userCreateOpen() {
 		return "userCreate";
 	}
 	
 	//ユーザー新規登録
-	@RequestMapping(value = "/userCreate", method = RequestMethod.POST)
+	@PostMapping("/userCreateAction")
 	public String userCreate(@RequestParam("name")String name, @RequestParam("pass1")String pass1, @RequestParam("pass2")String pass2, Model model) {
 		String password = "";
 		//空欄がある場合

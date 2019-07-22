@@ -8,8 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.CollectionUtils;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import mumeisyo.model.User;
@@ -25,8 +25,8 @@ public class UserDetail {
 	@Autowired
 	Common common;
 	
-	//他ユーザーの情報ページを表示
-	@RequestMapping(value = "/userDetail", method = RequestMethod.GET)
+	//ユーザーの情報ページを表示
+	@GetMapping("/userDetail")
 	public String userDetailOpen(@RequestParam("userId")long userId, Model model) {
 		//ログインしていない場合ログインページへ送る
 		boolean check = common.loginCheck(model);
@@ -36,15 +36,31 @@ public class UserDetail {
 			//ユーザー情報と投稿履歴を取得する
 			common.getUserDetail(userId, model);
 			//セッション読み込み
-			common.sessionSet(model);
+			common.sessionGet(model);
 			
-			model.addAttribute("myData", "myData");
+			//自分のページの場合
+			long myId = (long)session.getAttribute("userId");
+			if(userId == myId) {
+				model.addAttribute("myData", "myData");
+			}
 		}
 		return "userDetail";
 	}
 	
+	//一言を更新する
+	@PostMapping("/greet")
+	public String greet(@RequestParam("greet") String greet, Model model) {
+		long userId = (long)session.getAttribute("userId");
+		//一言更新
+		userRep.greet(greet, userId);
+		
+		model.addAttribute("msg", "一言を更新しました。");
+		userDetailOpen(userId, model);
+		return "userDetail";
+	}
+	
 	//情報変更前に本人確認
-	@RequestMapping(value = "/userDetailCheck", method = RequestMethod.POST)
+	@PostMapping("/userDetailCheck")
 	public String userDetailCheck(@RequestParam("password")String password, Model model) {
 		//空欄がある場合
 		if(password == "") {
@@ -68,15 +84,17 @@ public class UserDetail {
 	}
 	
 	//ユーザー情報変更
-	@RequestMapping(value = "/newUserDetail", method = RequestMethod.POST)
+	@PostMapping("/newUserDetail")
 	public String newUserDetail(@RequestParam("name")String name, @RequestParam("pass1")String pass1, @RequestParam("pass2")String pass2, Model model) {
 		String password = "";
 		//空欄がある場合
 		if(name == "" || pass1 == "" || pass2 == "") {
 			model.addAttribute("msg", "全て入力してください。");
+			model.addAttribute("newUserDetail", "newUserDetail");
 		//パスワードが違う場合
 		}else if(!(pass1.equals(pass2))) {
 			model.addAttribute("msg", "パスワードは同じものを入力してください。");
+			model.addAttribute("newUserDetail", "newUserDetail");
 		//パスワードが同じ場合
 		}else {
 			password = pass1;

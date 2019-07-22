@@ -5,8 +5,8 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import mumeisyo.repository.UserRepository;
 import mumeisyo.service.Common;
@@ -21,7 +21,7 @@ public class UserDelete {
 	Common common;
 	
 	//退会ページを表示
-	@RequestMapping(value = "/userDelete", method = RequestMethod.GET)
+	@GetMapping("/userDelete")
 	public String userDeleteOpen(Model model) {
 		//ログインしていない場合ログインページへ送る
 		boolean check = common.loginCheck(model);
@@ -33,7 +33,7 @@ public class UserDelete {
 	}
 	
 	//退会
-	@RequestMapping(value = "/deleteAction", method = RequestMethod.GET)
+	@PostMapping("/userDeleteAction")
 	public String userDelete(Model model) {
 		long userId = (long)session.getAttribute("userId");
 		String name = (String)session.getAttribute("name");

@@ -6,8 +6,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import mumeisyo.model.Place;
@@ -22,7 +22,7 @@ public class Browse {
 	Common common;
 	
 	//投稿紹介ページを表示する
-	@RequestMapping(value = "/browse", method = RequestMethod.GET)
+	@GetMapping("/browse")
 	public String browseOpen(Model model) throws SQLException {
 		//ログインしていない場合ログインページへ送る
 		boolean check = common.loginCheck(model);
@@ -34,13 +34,13 @@ public class Browse {
 			model.addAttribute("sortResult", "新しい順");
 			
 			//セッション読み込み
-			common.sessionSet(model);
+			common.sessionGet(model);
 			return "browse";
 		}
 	}
 	
 	//投稿を並べ替え
-	@RequestMapping(value = "/browseSort", method = RequestMethod.POST)
+	@PostMapping("/browseSort")
 	public String browseSort(@RequestParam("sort")String sort, Model model) throws SQLException {
 		List<Place> placeList = null;
 		switch(sort) {
@@ -64,7 +64,7 @@ public class Browse {
 		model.addAttribute("placeList", placeList);
 		
 		//セッション読み込み
-		common.sessionSet(model);
+		common.sessionGet(model);
 		return "browse";
 	}
 }

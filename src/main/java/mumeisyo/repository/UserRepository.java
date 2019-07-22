@@ -30,6 +30,11 @@ public interface UserRepository extends JpaRepository<User, Long> {
 	@Query(value = "INSERT INTO user (name, password) VALUES (:name, :password)", nativeQuery = true)
 	public void userCreate(String name, String password);
 	
+	//一言更新
+	@Modifying
+	@Query(value = "UPDATE user SET greet = :greet WHERE id = :id", nativeQuery = true)
+	public void greet(String greet, long id);
+	
 	//ユーザー情報取得
 	@Query(value = "SELECT * FROM user WHERE id = :id", nativeQuery = true)
 	public List<User> getUserData(long id);
