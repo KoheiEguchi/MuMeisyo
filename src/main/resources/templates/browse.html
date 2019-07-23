@@ -25,7 +25,14 @@
 							<p><br></p>
 							<img class="thumbnail" th:src="@{/__*{pic}__}" th:alt="投稿された画像">
 						</div>
-						<p class="textShort">[[*{text}]]</p>
+						<div class="textShort">
+							<th:block th:if=*{text}>
+								<th:block th:each="str, stat : *{text.split('\r\n|\r|\n', -1)}">
+									<th:block>[[${str}]]</th:block>
+									<br th:if="${!stat.last}">
+								</th:block>
+							</th:block>
+						</div>
 						<p>高評価数：[[*{good}]]</p>
 					</div>
 				</a>

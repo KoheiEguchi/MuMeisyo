@@ -18,7 +18,12 @@
 				<p><br></p>
 				<img class="detailPic" th:src="@{/__*{pic}__}" th:alt="投稿された画像">
 			</div>
-			<p>[[*{text}]]</p>
+			<th:block th:if=*{text}>
+				<th:block th:each="str, stat : *{text.split('\r\n|\r|\n', -1)}">
+					<th:block>[[${str}]]</th:block>
+					<br th:if="${!stat.last}">
+				</th:block>
+			</th:block>
 			<p>高評価数：[[*{good}]]</p>
 			<div th:if="${myPost == null}">
 				<div th:if="${noGood == null}">
@@ -47,7 +52,15 @@
 			<div th:inline="text" th:each="comment: ${commentList}" th:object="${comment}">
 				<p>投稿者：[[*{name}]]様</p>
 				<p>投稿日時：[[*{#calendars.format(commentDate, 'yyyy年M月d日 k時m分s秒')}]]</p>
-				<p>コメント：[[*{comment}]]</p>
+				<p>コメント：</p>
+				<p>
+					<th:block th:if=*{comment}>
+						<th:block th:each="str, stat : *{comment.split('\r\n|\r|\n', -1)}">
+							<th:block>[[${str}]]</th:block>
+							<br th:if="${!stat.last}">
+						</th:block>
+					</th:block>
+				</p>
 				<br>
 			</div>
 			<form th:action="@{/comment}" method="post">

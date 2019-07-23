@@ -39,6 +39,7 @@ div, p {
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
+	/* 改行時にも省略できるようにしたい */
 }
 
 /* 一覧画面の表示を整える */

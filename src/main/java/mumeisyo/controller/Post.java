@@ -49,8 +49,6 @@ public class Post {
 		}else {
 			//画像を保存する
 			String picName = common.picSave(pic);
-			//改行を反映
-			//String text = textBefore.replace("\r\n", "<br/>");
 			
 			String name = (String)session.getAttribute("name");
 			long userId = (long)session.getAttribute("userId");
