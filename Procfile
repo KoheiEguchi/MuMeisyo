@@ -1,1 +1,1 @@
-web: java -jar target/mumeisyo-1.0.0.jar
+web: java -jar target/MuMeisyo-1.0.0.jar
