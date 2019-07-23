@@ -1,1 +1,1 @@
-web: java -jar target/MuMeisyo-0.0.1.jar
+web: java $JAVA_OPTS -jar target/*.jar --server.port=$PORT --spring.profiles.active=heroku
