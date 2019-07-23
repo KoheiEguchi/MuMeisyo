@@ -1,1 +1,1 @@
-web: java $JAVA_OPTS -cp target/classes:target/dependency/* MuMeisyo
+web: java -jar target/mumeisyo-1.0.0.jar
