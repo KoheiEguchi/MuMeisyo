@@ -19,9 +19,9 @@
 				<img class="detailPic" th:src="@{/__*{pic}__}" th:alt="投稿された画像">
 			</div>
 			<th:block th:if=*{text}>
-				<th:block th:each="str, stat : *{text.split('\r\n|\r|\n', -1)}">
-					<th:block>[[${str}]]</th:block>
-					<br th:if="${!stat.last}">
+				<th:block th:each="oneLineText, textZone : *{text.split('\r\n|\r|\n', -1)}">
+					<th:block>[[${oneLineText}]]</th:block>
+					<br th:if="${!textZone.last}">
 				</th:block>
 			</th:block>
 			<p>高評価数：[[*{good}]]</p>
@@ -55,9 +55,9 @@
 				<p>コメント：</p>
 				<p>
 					<th:block th:if=*{comment}>
-						<th:block th:each="str, stat : *{comment.split('\r\n|\r|\n', -1)}">
-							<th:block>[[${str}]]</th:block>
-							<br th:if="${!stat.last}">
+						<th:block th:each="oneLineComment, commentZone : *{comment.split('\r\n|\r|\n', -1)}">
+							<th:block>[[${oneLineComment}]]</th:block>
+							<br th:if="${!commentZone.last}">
 						</th:block>
 					</th:block>
 				</p>

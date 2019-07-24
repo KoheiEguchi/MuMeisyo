@@ -13,7 +13,7 @@
 				<p>登録日時：[[*{#calendars.format(createDate, 'yyyy年M月d日 k時m分s秒')}]]</p>
 				<p>更新日時：[[*{#calendars.format(updateDate, 'yyyy年M月d日 k時m分s秒')}]]</p>
 				<div th:if="${myData != null}">
-					<form th:action="greet" method="post">
+					<form th:action="@{greet}" method="post">
 						<p>
 							一言：<input type="text" name="greet" th:value=*{greet} placeholder="ご自由に一言どうぞ">
 							<input class="btn btn-primary shadow ml-2" type="submit" value="変更">
@@ -40,14 +40,14 @@
 								<p><br></p>
 								<img class="thumbnail" th:src="@{/__*{pic}__}" th:alt="投稿された画像">
 							</div>
-							<div class="textShort">
-								<th:block th:if=*{text}>
-									<th:block th:each="str, stat : *{text.split('\r\n|\r|\n', -1)}">
-										<th:block>[[${str}]]</th:block>
-										<br th:if="${!stat.last}">
-									</th:block>
+							<th:block th:if=*{text}>
+								<th:block th:each="oneLineText, textZone : *{text.split('\r\n|\r|\n', -1)}">
+									<div th:if="${textZone.first}">
+										<div class="textShort"><th:block>[[${oneLineText}]]</th:block></div>
+									</div>
+									<div th:if="${!textZone.first}" class="d-none"></div>
 								</th:block>
-							</div>
+							</th:block>
 							<p>高評価数：<span th:text="*{good}"></span></p>
 						</div>
 					</a>

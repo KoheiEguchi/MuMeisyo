@@ -30,6 +30,10 @@ public interface UserRepository extends JpaRepository<User, Long> {
 	@Query(value = "INSERT INTO user (name, password) VALUES (:name, :password)", nativeQuery = true)
 	public void userCreate(String name, String password);
 	
+	//ユーザー一覧取得
+	@Query(value = "SELECT * FROM user", nativeQuery = true)
+	public List<User> getUserList();
+	
 	//一言更新
 	@Modifying
 	@Query(value = "UPDATE user SET greet = :greet WHERE id = :id", nativeQuery = true)
@@ -46,6 +50,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
 	
 	//退会
 	@Modifying
-	@Query(value = "DELETE FROM user WHERE user_id = :user_id AND name = :name", nativeQuery = true)
-	public void userDelete(long user_id, String name);
+	@Query(value = "DELETE FROM user WHERE id = :id AND name = :name", nativeQuery = true)
+	public void userDelete(long id, String name);
 }

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout::head('ユーザー一覧')"></head>
+<body>
+	<div th:replace="layout::header"></div>
+	<div class="container">
+		<div th:replace="layout::jumbotron"></div>
+		<div class="h1 mt-4">ユーザー一覧</div>
+		<div th:replace="layout::msg"></div>
+		<div class="row row-eq-height">
+			<div class="col-md-4 col-xs-12 mt-4" th:inline="text" th:each="user: ${userList}" th:object="${user}">
+				<p>ユーザー名：<a th:href="@{/userDetail(userId=*{id})}"><span class="h4">[[*{name}]]</span></a>様</p>
+				<p>登録日時：[[*{#calendars.format(createDate, 'yyyy年M月d日 k時m分s秒')}]]</p>
+				<p>更新日時：[[*{#calendars.format(updateDate, 'yyyy年M月d日 k時m分s秒')}]]</p>
+				<div th:if="*{id != 1}">
+					<a th:href="@{/userBAN(id=*{id})}"><input class="btn btn-danger shadow" type="button" value="ユーザーを退会させる"></a>
+				</div>
+				<div th:if="*{id == 1}"><br></div>
+				<br>
+			</div>
+		</div>
+		<a th:href="@{/top}"><input class="btn btn-success shadow" type="button" value="戻る"></a>
+	</div>
+	<div th:replace="layout::footer"></div>
+</body>
+</html>

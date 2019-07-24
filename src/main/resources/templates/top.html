@@ -22,14 +22,14 @@
 							<p><br></p>
 							<img class="topPic" th:src="@{/__*{pic}__}" th:alt="投稿された画像">
 						</div>
-						<div class="textShort">
-							<th:block th:if=*{text}>
-								<th:block th:each="str, stat : *{text.split('\r\n|\r|\n', -1)}">
-									<th:block>[[${str}]]</th:block>
-									<br th:if="${!stat.last}">
-								</th:block>
+						<th:block th:if=*{text}>
+							<th:block th:each="oneLineText, textZone : *{text.split('\r\n|\r|\n', -1)}">
+								<div th:if="${textZone.first}">
+									<div class="textShort"><th:block>[[${oneLineText}]]</th:block></div>
+								</div>
+								<div th:if="${!textZone.first}" class="d-none"></div>
 							</th:block>
-						</div>
+						</th:block>
 						<p>高評価数：[[*{good}]]</p>
 					</div>
 				</a>
@@ -51,6 +51,7 @@
 				</div>
 				<div th:if="${userId == 1}">
 					<a th:href="@{/forumCheck}"><input class="btn btn-light shadow mt-5" type="button" value="意見投稿確認"></a>
+					<div class="mt-4"><a th:href="@{/userList}"><input class="btn btn-danger shadow" type="button" value="ユーザー一覧"></a></div>
 				</div>
 			    <a th:href="@{/logout}"><input class="btn btn-secondary shadow mt-5" type="button" value="ログアウト"></a>
 			</div>

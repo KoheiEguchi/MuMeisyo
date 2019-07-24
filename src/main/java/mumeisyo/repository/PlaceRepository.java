@@ -43,7 +43,7 @@ public interface PlaceRepository extends JpaRepository<Place, Long> {
 	public int myPostCheck(long id);
 	
 	//ユーザーの投稿履歴取得
-	@Query(value = "SELECT * FROM place WHERE user_id = :user_id", nativeQuery = true)
+	@Query(value = "SELECT * FROM place WHERE user_id = :user_id ORDER BY post_date DESC", nativeQuery = true)
 	public List<Place> userPlace(long user_id);
 	
 	//新規投稿
