@@ -64,7 +64,7 @@
 				<br>
 			</div>
 			<form th:action="@{/comment}" method="post">
-				<textarea class="mt-5 postComment" name="comment" placeholder="この投稿へのコメント等お書きください。"></textarea>
+				<textarea class="mt-5 postComment" name="comment" placeholder="この投稿へのコメント等お書きください"></textarea>
 				<input type="hidden" name="placeId" th:value=*{id}>
 				<br>
 				<input class="btn btn-primary shadow my-2" type="submit" value="書き込む">

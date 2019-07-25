@@ -34,6 +34,16 @@ public interface PlaceRepository extends JpaRepository<Place, Long> {
 	@Query(value = "SELECT * FROM place ORDER BY good", nativeQuery = true)
 	public List<Place> getPlaceBad();
 	
+	//一覧を指定名つき、写真ありで絞り込み
+	@Query(value = "SELECT * FROM place WHERE name LIKE %:name% AND pic IS NOT NULL ORDER BY post_date DESC", nativeQuery = true)
+	public List<Place> chooseIsPic(String name);
+	//一覧を指定名つき、写真なしで絞り込み
+	@Query(value = "SELECT * FROM place WHERE name LIKE %:name% AND pic IS NULL ORDER BY post_date DESC", nativeQuery = true)
+	public List<Place> chooseNoPic(String name);
+	//一覧を指定名つき、写真指定なしで絞り込み
+	@Query(value = "SELECT * FROM place WHERE name LIKE %:name% ORDER BY post_date DESC", nativeQuery = true)
+	public List<Place> chooseBothPic(String name);
+	
 	//指定された投稿の詳細を取得
 	@Query(value = "SELECT * FROM place WHERE id = :id", nativeQuery = true)
 	public List<Place> getPostDetail(long id);

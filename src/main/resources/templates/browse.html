@@ -8,9 +8,34 @@
 		<div class="h1 my-4">投稿一覧([[${sortResult}]])</div>
 		<div th:replace="layout::msg"></div>
 		<form th:action="@{/browseSort}" method="post">
-			<div th:replace="layout::sort"></div>
-			<p><button class="btn btn-success shadow mt-2" type="submit" name="sortBtn" value="browse">並べ替え</button></p>
+			<div class="h4 mt-2">並べ替え</div>
+			<select name="sort">
+				<option value="new">新しい順</option>
+				<option value="old">古い順</option>
+				<option value="good">評価の多い順</option>
+				<option value="bad">評価の少ない順</option>
+			</select>
+			<p><button class="btn btn-warning shadow mt-4" type="submit" name="sortBtn" value="browse">並べ替え</button></p>
 		</form>
+		<form th:action="@{/browseChoose}" method="post">
+			<div class="h4 mt-4">絞り込み</div>
+			<p class="my-3">投稿者名で絞り込む：<input type="text" name="name" size="26" placeholder="投稿者名を入力してください"></p>
+			<p>写真で絞り込む：</p>
+			<div class="btn-group" data-toggle="buttons">
+				<label class="btn btn-outline-danger shadow py-2 picBtn">
+					<input class="hideRadio" type="radio" name="pic" value="isPic">写真○
+				</label>
+				<label class="btn btn-outline-primary shadow mx-4 py-2 picBtn">
+					<input class="hideRadio" type="radio" name="pic" value="noPic">写真×
+				</label>
+				<label class="btn btn-outline-secondary shadow active py-2 picBtn">
+					<input class="hideRadio" type="radio" name="pic" value="bothPic" checked>無指定
+				</label>
+			</div>
+			<br>
+			<input class="btn btn-warning shadow my-4" type="submit" value="絞り込む">
+		</form>
+		<div th:if="${noChoose != null}" class="text-center mb-3">[[${noChoose}]]</div>
 		<div class="row row-eq-height">
 			<div class="col-md-3 col-xs-6 placesPadding" th:inline="text" th:each="place: ${placeList}" th:object="${place}">
 				<a class="detailLink" th:href="@{/postDetail(id=*{id},userId=${userId})}">

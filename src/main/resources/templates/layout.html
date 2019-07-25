@@ -8,6 +8,7 @@
 		<link rel="stylesheet" type="text/css" th:href="@{css/original/common.css}">
 		<link rel="stylesheet" type="text/css" th:href="@{css/original/header.css}">
 		<link rel="stylesheet" type="text/css" th:href="@{css/original/top.css}">
+		<link rel="stylesheet" type="text/css" th:href="@{css/original/browse.css}">
 		<link rel="stylesheet" type="text/css" th:href="@{css/original/postDetail.css}">
 		<script type="text/javascript" th:src="@{webjars/jquery/1.12.4/jquery.min.js}"></script>
 		<script type="text/javascript" th:src="@{webjars/bootstrap/4.2.1/js/bootstrap.min.js}"></script>
@@ -60,15 +61,6 @@
 			<div class="col-md-6 col-xs-12 text-left">パスワード(確認)</div>
 			<div class="col-md-6 col-xs-12 text-right"><input type="password" name="pass2" placeholder="パスワード(確認)"></div>
 		</div>
-	</div>
-	<!--/* 並べ替え */-->
-	<div th:fragment="sort">
-		<select name="sort">
-			<option value="new">新しい順</option>
-			<option value="old">古い順</option>
-			<option value="good">評価の多い順</option>
-			<option value="bad">評価の少ない順</option>
-		</select>
 	</div>
 	<!--/* フッター */-->
 	<footer th:fragment="footer">

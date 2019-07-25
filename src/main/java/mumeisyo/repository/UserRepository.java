@@ -34,6 +34,17 @@ public interface UserRepository extends JpaRepository<User, Long> {
 	@Query(value = "SELECT * FROM user", nativeQuery = true)
 	public List<User> getUserList();
 	
+	//登録が新しい順に並べ替え
+	@Query(value = "SELECT * FROM user ORDER BY create_date DESC", nativeQuery = true)
+	public List<User> getUserNew();
+	//登録が古い順に並べ替え
+	@Query(value = "SELECT * FROM user ORDER BY create_date ASC", nativeQuery = true)
+	public List<User> getUserOld();
+	
+	//ユーザーを名前で絞り込み
+	@Query(value = "SELECT * FROM user WHERE name LIKE %:name%", nativeQuery = true)
+	public List<User> chooseUser(String name);
+	
 	//一言更新
 	@Modifying
 	@Query(value = "UPDATE user SET greet = :greet WHERE id = :id", nativeQuery = true)

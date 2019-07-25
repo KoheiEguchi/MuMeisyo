@@ -41,7 +41,7 @@ public class Browse {
 	
 	//投稿を並べ替え
 	@PostMapping("/browseSort")
-	public String browseSort(@RequestParam("sort")String sort, Model model) throws SQLException {
+	public String browseSort(@RequestParam("sort") String sort, Model model) throws SQLException {
 		List<Place> placeList = null;
 		switch(sort) {
 		case "new":
@@ -63,6 +63,32 @@ public class Browse {
 		}
 		model.addAttribute("placeList", placeList);
 		
+		//セッション読み込み
+		common.sessionGet(model);
+		return "browse";
+	}
+	
+	//投稿を絞り込み
+	@PostMapping("/browseChoose")
+	public String browseChoose(@RequestParam("name") String name, @RequestParam("pic") String pic, Model model) {
+		List<Place> placeList = null;
+		//写真ありの場合
+		if(pic.equals("isPic")) {
+			placeList = placeRep.chooseIsPic(name);
+		//写真なしの場合
+		}else if(pic.equals("noPic")){
+			placeList = placeRep.chooseNoPic(name);
+		//写真指定なしの場合
+		}else {
+			placeList = placeRep.chooseBothPic(name);
+		}
+		//該当しなかった場合
+		if(placeList.isEmpty()) {
+			model.addAttribute("noChoose", "条件に合う投稿はありません。");
+		}
+		model.addAttribute("placeList", placeList);
+		model.addAttribute("sortResult", "新しい順");
+
 		//セッション読み込み
 		common.sessionGet(model);
 		return "browse";

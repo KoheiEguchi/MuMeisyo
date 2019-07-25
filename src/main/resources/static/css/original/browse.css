@@ -1,0 +1,11 @@
+@charset "UTF-8";
+
+/* ラジオボタンの◯を消す */
+.hideRadio {
+	display: none;
+}
+
+/* カーソル形を変更 */
+.picBtn {
+	cursor: pointer;
+}

@@ -5,8 +5,23 @@
 	<div th:replace="layout::header"></div>
 	<div class="container">
 		<div th:replace="layout::jumbotron"></div>
-		<div class="h1 mt-4">ユーザー一覧</div>
+		<div class="h1 mt-4">ユーザー一覧([[${sortResult}]])</div>
 		<div th:replace="layout::msg"></div>
+		<form th:action="@{/userSort}" method="post">
+			<div class="h4 mt-2">並べ替え</div>
+			<select name="sort">
+				<option value="old">登録の古い順</option>
+				<option value="new">登録の新しい順</option>
+			</select>
+			<p><input class="btn btn-warning shadow mt-4" type="submit" value="並べ替え"></p>
+		</form>
+		<form th:action="@{/userChoose}" method="post">
+			<div class="h4 mt-4">絞り込み</div>
+			<p class="my-3">ユーザー名で絞り込む：<input type="text" name="name" size="28" placeholder="ユーザー名を入力してください"></p>
+			<br>
+			<input class="btn btn-warning shadow mb-4" type="submit" value="絞り込む">
+		</form>
+		<div th:if="${noChoose != null}" class="text-center mb-3">[[${noChoose}]]</div>
 		<div class="row row-eq-height">
 			<div class="col-md-4 col-xs-12 mt-4" th:inline="text" th:each="user: ${userList}" th:object="${user}">
 				<p>ユーザー名：<a th:href="@{/userDetail(userId=*{id})}"><span class="h4">[[*{name}]]</span></a>様</p>
