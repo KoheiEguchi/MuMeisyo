@@ -63,10 +63,14 @@
 		</div>
 	</div>
 	<!--/* フッター */-->
-	<footer th:fragment="footer">
-		<div class="container-fluid">
-			<div class="fixed-bottom bg-success">
-				<div class="text-right">フッター</div>
+	<footer th:fragment="footer">  <!-- フッターをページ最下部に固定し横も全て覆いたい -->
+		<div class="container-fluid mt-4 footerArea">
+			<div class="bg-success py-2">
+				<form th:action="wordSearch" method="post">  <!-- Browseで検索したい -->
+					<div class="h5 text-light">語句検索</div>
+					<p><input type="text" name="word" size="40" placeholder="探したい語句を入力してください">
+					<input class="btn btn-primary shadow ml-3" type="submit" value="検索"></p>
+				</form>
 			</div>
 		</div>
 	</footer>
