@@ -10,8 +10,7 @@ body {
     /* ヘッダー用 */
 	padding-top: 50px;
 	/* フッター用 */
-	display: flex;
-	flex-direction: column;
+	padding-bottom: 150px;
 	/* 背景用 */
 	background-image: url("/pic/layout/background.png");
 	background-repeat: no-repeat;
@@ -86,9 +85,4 @@ div, p {
 .postDesc {
 	width: 100%;
 	height: 250px;
-}
-
-/* フッター設定 */
-.footerArea {
-	margin-top: auto;
 }

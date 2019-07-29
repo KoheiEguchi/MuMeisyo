@@ -25,6 +25,7 @@
 				</th:block>
 			</th:block>
 			<p>高評価数：[[*{good}]]</p>
+			<a th:href="@{#commentForm}"><input class="btn btn-light shadow mb-4" type="button" value="コメントを書く"></a>
 			<div th:if="${myPost == null}">
 				<div th:if="${noGood == null}">
 					<button class="btn btn-secondary" disabled="disabled">高評価済み</button>
@@ -63,6 +64,7 @@
 				</p>
 				<br>
 			</div>
+			<div id="commentForm"></div>
 			<form th:action="@{/comment}" method="post">
 				<textarea class="mt-5 postComment" name="comment" placeholder="この投稿へのコメント等お書きください"></textarea>
 				<input type="hidden" name="placeId" th:value=*{id}>

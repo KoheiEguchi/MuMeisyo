@@ -1,0 +1,16 @@
+@charset "UTF-8";
+
+/* フッターを展開式にする */
+.footerCheck {
+	display: none;
+}
+.footerHide {
+	overflow: hidden;
+	height: 0;
+    opacity: 0;
+    transition: 0.8s;
+}
+.footerCheck:checked ~ .footerHide {
+	height: auto;
+	opacity: 1;
+}

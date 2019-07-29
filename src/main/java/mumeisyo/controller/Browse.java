@@ -93,4 +93,27 @@ public class Browse {
 		common.sessionGet(model);
 		return "browse";
 	}
+	
+	//特定の語句で検索する
+	@PostMapping("/wordSearch")
+	public String wordSearch(@RequestParam("word") String word, Model model) {
+		List<Place> placeList = placeRep.wordSearch(word);
+		model.addAttribute("placeList", placeList);
+		//検索語句の表示
+		if(!(word.equals(""))){
+			model.addAttribute("sortResult", "「" + word + "」での検索結果");
+		}else {
+			model.addAttribute("sortResult", "新しい順");
+		}
+		
+		//該当しなかった場合
+		if(placeList.isEmpty()) {
+			model.addAttribute("noChoose", "条件に合う投稿はありません。");
+		}
+		
+		//セッション読み込み
+		common.sessionGet(model);
+		return "browse";
+	}
+	
 }

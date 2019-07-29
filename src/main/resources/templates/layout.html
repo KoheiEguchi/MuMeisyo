@@ -3,6 +3,9 @@
 	<!--/* head */-->
 	<head th:fragment="head(title)">
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta name="description" content="このサイトは、あなたの身近にある広く知られてはいないがいい所やお気に入りの場所を教え合おうというサイトです。">
+		<meta name="description" content="その場所の紹介や任意での写真公開ができ、その投稿に対し他ユーザーが高評価やコメントをつけられます。">
+		<meta name="viewport" content="width=device-width,initial-scale=1">
 		
 		<link rel="stylesheet" th:href="@{webjars/bootstrap/4.2.1/css/bootstrap.min.css}">
 		<link rel="stylesheet" type="text/css" th:href="@{css/original/common.css}">
@@ -10,6 +13,7 @@
 		<link rel="stylesheet" type="text/css" th:href="@{css/original/top.css}">
 		<link rel="stylesheet" type="text/css" th:href="@{css/original/browse.css}">
 		<link rel="stylesheet" type="text/css" th:href="@{css/original/postDetail.css}">
+		<link rel="stylesheet" type="text/css" th:href="@{css/original/footer.css}">
 		<script type="text/javascript" th:src="@{webjars/jquery/1.12.4/jquery.min.js}"></script>
 		<script type="text/javascript" th:src="@{webjars/bootstrap/4.2.1/js/bootstrap.min.js}"></script>
 		<script type="text/javascript" th:src="@{js/original/common.js}"></script>
@@ -63,14 +67,19 @@
 		</div>
 	</div>
 	<!--/* フッター */-->
-	<footer th:fragment="footer">  <!-- フッターをページ最下部に固定し横も全て覆いたい -->
-		<div class="container-fluid mt-4 footerArea">
+	<footer th:fragment="footer">
+		<div class="fixed-bottom">
 			<div class="bg-success py-2">
-				<form th:action="wordSearch" method="post">  <!-- Browseで検索したい -->
-					<div class="h5 text-light">語句検索</div>
-					<p><input type="text" name="word" size="40" placeholder="探したい語句を入力してください">
-					<input class="btn btn-primary shadow ml-3" type="submit" value="検索"></p>
-				</form>
+				<label class="btn btn-danger shadow" for="footerMain">語句検索</label>
+				<input class="footerCheck" type="checkbox" id="footerMain">
+				<div class="footerHide">
+					<div class="py-3">
+						<form th:action="wordSearch" method="post">
+							<input type="text" name="word" size="40" placeholder="探したい語句を入力してください">
+							<input class="btn btn-primary shadow ml-3" type="submit" value="検索">
+						</form>
+					</div>
+				</div>
 			</div>
 		</div>
 	</footer>

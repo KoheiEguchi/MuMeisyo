@@ -44,6 +44,10 @@ public interface PlaceRepository extends JpaRepository<Place, Long> {
 	@Query(value = "SELECT * FROM place WHERE name LIKE %:name% ORDER BY post_date DESC", nativeQuery = true)
 	public List<Place> chooseBothPic(String name);
 	
+	//特定語句検索
+	@Query(value = "SELECT * FROM place WHERE name LIKE %:word% OR text LIKE %:word% ORDER BY post_date DESC", nativeQuery = true)
+	public List<Place> wordSearch(String word);
+	
 	//指定された投稿の詳細を取得
 	@Query(value = "SELECT * FROM place WHERE id = :id", nativeQuery = true)
 	public List<Place> getPostDetail(long id);
