@@ -3,6 +3,7 @@
 	<!--/* head */-->
 	<head th:fragment="head(title)">
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta name="description" content="無名な名所">
 		<meta name="description" content="このサイトは、あなたの身近にある広く知られてはいないがいい所やお気に入りの場所を教え合おうというサイトです。">
 		<meta name="description" content="その場所の紹介や任意での写真公開ができ、その投稿に対し他ユーザーが高評価やコメントをつけられます。">
 		<meta name="viewport" content="width=device-width,initial-scale=1">
@@ -23,7 +24,7 @@
 	<!--/* ヘッダー */-->
 	<header th:fragment="header">
 		<nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-info">
-			<a class="navbar-brand text-light" th:href="@{/top}">無名所</a>
+			<a class="navbar-brand text-light" th:href="@{/top}">無名な名所</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarList">
 				<span class="navbar-toggler-icon"></span>
 			</button>
@@ -42,7 +43,11 @@
 	<div th:fragment="jumbotron">
 		<a class="detailLink" th:href="@{/top}">
 			<div class="jumbotron">
-				<div class="display-4">無名所</div>
+				<div class="h1 text-left mb-5 titleLeftSpace">
+					<span class="text-warning">無</span><span class="display-4 text-info mr-1">名</span>
+					<span class="h2 text-secondary">な</span>
+					<span class="display-4 text-info ml-1">名</span><span class="text-warning">所</span>
+				</div>
 			</div>
 		</a>
 	</div>
@@ -58,12 +63,12 @@
 	<!--/* 新規登録、変更 */-->
 	<div th:fragment="createOrUpdate">
 		<div class="row">
-			<div class="col-md-6 col-xs-12 text-left">ユーザー名</div>
-			<div class="col-md-6 col-xs-12 text-right"><input type="text" name="name" placeholder="ユーザー名" autofocus></div>
-			<div class="col-md-6 col-xs-12 text-left">パスワード</div>
-			<div class="col-md-6 col-xs-12 text-right"><input type="password" name="pass1" placeholder="パスワード"></div>
-			<div class="col-md-6 col-xs-12 text-left">パスワード(確認)</div>
-			<div class="col-md-6 col-xs-12 text-right"><input type="password" name="pass2" placeholder="パスワード(確認)"></div>
+			<div class="col-md-6 col-xs-12 text-left my-1">ユーザー名</div>
+			<div class="col-md-6 col-xs-12 text-right my-1"><input type="text" name="name" placeholder="ユーザー名" autofocus></div>
+			<div class="col-md-6 col-xs-12 text-left my-1">パスワード</div>
+			<div class="col-md-6 col-xs-12 text-right my-1"><input type="password" name="pass1" placeholder="パスワード"></div>
+			<div class="col-md-6 col-xs-12 text-left my-1">パスワード(確認)</div>
+			<div class="col-md-6 col-xs-12 text-right my-1"><input type="password" name="pass2" placeholder="パスワード(確認)"></div>
 		</div>
 	</div>
 	<!--/* フッター */-->
@@ -75,7 +80,7 @@
 				<div class="footerHide">
 					<div class="py-3">
 						<form th:action="wordSearch" method="post">
-							<input type="text" name="word" size="40" placeholder="探したい語句を入力してください">
+							<input type="text" name="word" size="38" placeholder="探したい語句を入力してください">
 							<input class="btn btn-primary shadow ml-3" type="submit" value="検索">
 						</form>
 					</div>

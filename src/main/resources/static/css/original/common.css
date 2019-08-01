@@ -33,6 +33,14 @@ div, p {
 	background-size: cover;
 	background-position: center 60%;
 }
+.titleLeftSpace {
+	margin-left: 5rem;
+}
+@media screen and (max-width: 500px) {
+	.titleLeftSpace {
+		margin-left: 0.5rem;
+	}
+}
 
 /* 投稿を横並びにする */
 .row-eq-height {
