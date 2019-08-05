@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout::head('コメント削除')"></head>
+<body>
+	<div th:replace="layout::header"></div>
+	<div class="container">
+		<div th:replace="layout::jumbotron"></div>
+		<div class="h1 mt-5">このコメントを本当に<span class="text-danger">削除</span>しますか？</div>
+		<div th:inline="text" th:each="comment: ${deleteComment}" th:object="${comment}">
+			<p>投稿者：[[*{name}]]様</p>
+			<p>投稿日時：[[*{#calendars.format(commentDate, 'yyyy年M月d日 k時m分s秒')}]]</p>
+			<p>コメント：</p>
+			<p>
+				<th:block th:if=*{comment}>
+					<th:block th:each="oneLineComment, commentZone : *{comment.split('\r\n|\r|\n', -1)}">
+						<th:block>[[${oneLineComment}]]</th:block>
+						<br th:if="${!commentZone.last}">
+					</th:block>
+				</th:block>
+			</p>
+			<form th:action="@{/commentDeleteOk}" method="post">
+				<input type="hidden" name="commentId" th:value="*{id}">
+				<input type="hidden" name="placeId" th:value="*{placeId}">
+				<input class="btn btn-danger shadow mt-5" type="submit" value="削除する(戻せません！)">
+			</form>
+			<br>
+			<a th:href="@{/postDetail(id=*{placeId}, userId=${userId})}"><input class="btn btn-success shadow my-4" type="button" value="戻る"></a>
+		</div>
+	</div>
+	<div th:replace="layout::footer"></div>
+</body>
+</html>

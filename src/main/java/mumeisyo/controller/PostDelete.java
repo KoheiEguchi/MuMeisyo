@@ -46,24 +46,12 @@ public class PostDelete {
 	//投稿を削除する
 	@PostMapping("/deletePostOk")
 	public String postDelete(@RequestParam("placeId") long placeId, Model model) {
-		//ログインしていない場合ログインページへ送る
-		boolean loginCheck = common.loginCheck(model);
-		if(loginCheck == false) {
-			return "login";
-		}else {
-			//管理人以外トップページへ送る
-			boolean adminCheck = common.adminCheck(model);
-			if(adminCheck == false) {
-				return "top";
-			}else {
-				//投稿削除
-				placeRep.postDelete(placeId);
-				model.addAttribute("msg", "削除しました。");
-				
-				//トップに戻る
-				top.topOpen(model);
-				return "top";
-			}
-		}
+		//投稿削除
+		placeRep.postDelete(placeId);
+		model.addAttribute("msg", "削除しました。");
+		
+		//トップに戻る
+		top.topOpen(model);
+		return "top";
 	}
 }

@@ -63,6 +63,9 @@
 						</th:block>
 					</th:block>
 				</p>
+				<p th:if="${userId == 1}">
+					<a th:href="@{/commentDelete(commentId=*{id})}"><input class="btn btn-danger shadow" type="button" value="コメントを削除"></a>
+				</p>
 				<br>
 			</div>
 			<div id="commentForm"></div>

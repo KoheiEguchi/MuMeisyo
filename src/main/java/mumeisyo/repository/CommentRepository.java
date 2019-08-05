@@ -21,4 +21,13 @@ public interface CommentRepository extends JpaRepository<Comment, Long> {
 	@Modifying
 	@Query(value = "INSERT INTO comment (name, user_id, place_id, comment) VALUES (:name, :user_id, :place_id, :comment)", nativeQuery = true)
 	public void postComment(String name, long user_id, long place_id, String comment);
+	
+	//削除コメント取得
+	@Query(value="SELECT * FROM comment WHERE id = :comment_id", nativeQuery = true)
+	public List<Comment> getDeleteComment(long comment_id);
+	
+	//コメント削除
+	@Modifying
+	@Query(value = "DELETE FROM comment WHERE id = :comment_id", nativeQuery = true)
+	public void deleteComment(long comment_id);
 }

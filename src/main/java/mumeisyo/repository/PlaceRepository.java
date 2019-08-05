@@ -57,7 +57,7 @@ public interface PlaceRepository extends JpaRepository<Place, Long> {
 	@Query(value = "SELECT * FROM place WHERE id = :id", nativeQuery = true)
 	public List<Place> getPostDetail(long id);
 	
-	//自分の投稿か確認
+	//自分の投稿か確認、コメント削除前にコメントされた投稿の主を取得
 	@Query(value = "SELECT user_id FROM place WHERE id = :id", nativeQuery = true)
 	public int myPostCheck(long id);
 	
