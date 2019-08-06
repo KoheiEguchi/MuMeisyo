@@ -15,31 +15,29 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-
-@Table(name="mumeisyo")
+@Table(name = "mumeisyo")
 public class Good {
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
 	private long id;
 	
 	@NotNull
-	@Column(name="name")
+	@Column(name = "name")
 	private String name;
 	
 	@NotNull
-	@Column(name="user_id")
+	@Column(name = "user_id")
 	private long userId;
 	
 	@NotNull
-	@Column(name="place_id")
+	@Column(name = "place_id")
 	private long placeId;
 	
-	@Column(name="good_date")
+	@Column(name = "good_date")
 	private Timestamp goodDate;
 	
 }

@@ -15,37 +15,35 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-
-@Table(name="mumeisyo")
-public class User {	
+@Table(name = "mumeisyo")
+public class User {
 	//セッション取得用
 	public User(long id) {
 		this.id = id;
 	}
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id")
 	private long id;
 	
 	@NotNull
-	@Column(name="name")
+	@Column(name = "name")
 	private String name;
 	
 	@NotNull
-	@Column(name="password")
+	@Column(name = "password")
 	private String password;
 	
-	@Column(name="create_date")
+	@Column(name = "create_date")
 	private Timestamp createDate;
 	
-	@Column(name="update_date")
+	@Column(name = "update_date")
 	private Timestamp updateDate;
 	
-	@Column(name="greet")
+	@Column(name = "greet")
 	private String greet;
 }

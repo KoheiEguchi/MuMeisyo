@@ -15,25 +15,23 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-
-@Table(name="mumeisyo")
+@Table(name = "mumeisyo")
 public class Forum {
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
 	private long id;
 	
-	@Column(name="address")
+	@Column(name = "address")
 	private String address;
 	
 	@NotNull
-	@Column(name="forum")
+	@Column(name = "forum")
 	private String forum;
 	
-	@Column(name="forum_date")
+	@Column(name = "forum_date")
 	private Timestamp forumDate;
 }

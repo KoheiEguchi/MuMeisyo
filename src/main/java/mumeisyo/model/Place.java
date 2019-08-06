@@ -15,12 +15,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-
-@Table(name="mumeisyo")
+@Table(name = "mumeisyo")
 public class Place {
 	//自分の投稿かの確認用
 	public Place(String name) {
@@ -28,28 +26,28 @@ public class Place {
 	}
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id")
 	private long id;
 	
 	@NotNull
-	@Column(name="name")
+	@Column(name = "name")
 	private String name;
 	
 	@NotNull
-	@Column(name="user_id")
+	@Column(name = "user_id")
 	private long userId;
 	
-	@Column(name="pic")
+	@Column(name = "pic")
 	private String pic;
 	
 	@NotNull
-	@Column(name="text")
+	@Column(name = "text")
 	private String text;
 	
-	@Column(name="post_date")
+	@Column(name = "post_date")
 	private Timestamp postDate;
 	
-	@Column(name="good")
+	@Column(name = "good")
 	private int good;
 }
